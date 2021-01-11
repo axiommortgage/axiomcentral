@@ -1,0 +1,34 @@
+$highlight-color: #84bd00;
+$base-color: #000;
+$base-mid-color: #414141;
+$light-gray: #d7e1c1;
+$bright-color: #fff;
+$display-font: 'Montserrat', sans-serif;
+$body-font: 'Open Sans', sans-serif;
+$shadow: 2px 2px 8px rgba(45, 44, 48, 0.15);
+$shadow-large: 8px 8px 24px rgba(45, 44, 48, 0.15);
+$cubic-transition: cubic-bezier(0,.83,.42,1.01);
+
+@media screen and (min-width: 0) and (max-width: 767px){
+  .ax_container{
+    width: 90%;
+    display: block;
+    margin: 0 auto;    
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px){
+  .ax_container{
+    width: 74rem;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 1200px){
+  .ax_container{
+    width: 114rem;
+    display: block;
+    margin: 0 auto;
+  }
+}
