@@ -1,21 +1,12 @@
 import { parseCookies } from 'nookies';
-import { Router } from 'next/router';
-import { route } from 'next/dist/next-server/server/router';
+import Layout from '../components/Layout';
 
 const Dashboard = props => {
 
   return (
-    <>
-      <nav>
-        Navbar
-        </nav>
-      <aside>
-        Sidebar
-        </aside>
-      <main>
-        Main
-        </main>
-    </>
+    <Layout>
+      <h1>HEEEEEEY</h1>
+    </Layout>
   )
 }
 

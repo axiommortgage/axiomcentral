@@ -1,0 +1,7 @@
+.ax_layout {
+  width: 100vw;
+  display: grid;
+  grid-template-areas: 
+   'topbar topbar'
+   'menu main';
+}
