@@ -1,7 +1,10 @@
 import Head from 'next/head';
 import Login from '../components/Login';
+import { useRouter } from 'next/router';
+import { parseCookies } from 'nookies';
 
-export default function Home() {
+const Home = props => {
+
   return (
     <div>
       <Head>
@@ -9,8 +12,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
       </Head>
-
       <main>
+
         <Login />
 
       </main>
@@ -18,3 +21,18 @@ export default function Home() {
     </div >
   )
 }
+
+export const getServerSideProps = async (ctx) => {
+
+  let auth = parseCookies(ctx).jwt;
+
+  if (auth) {
+  }
+  return {
+    props: {
+
+    }
+  }
+}
+
+export default Home;
