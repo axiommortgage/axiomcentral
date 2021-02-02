@@ -1,6 +1,6 @@
 import styles from '../styles/Menu.module.scss';
 import Link from 'next/link';
-import { UilApps } from '@iconscout/react-unicons';
+import { UilApps, UilUser, UilUserPlus } from '@iconscout/react-unicons';
 
 
 const Menu = props => {
@@ -9,7 +9,17 @@ const Menu = props => {
       <nav>
         <div className={styles.ax_menu_item}>
           <UilApps size={20} />
-          <Link href="/"> Dashboard</Link>
+          <Link href="/dashboard"> Dashboard</Link>
+        </div>
+
+        <div className={styles.ax_menu_item}>
+          <UilUserPlus size={20} />
+          <Link href="/add-broker"> Add Broker</Link>
+        </div>
+
+        <div className={styles.ax_menu_item}>
+          <UilUser size={20} />
+          <Link href="/all-brokers"> All Brokers</Link>
         </div>
       </nav>
     </aside>

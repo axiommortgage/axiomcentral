@@ -1,6 +1,7 @@
 $highlight-color: #84bd00;
 $base-color: #000;
 $base-mid-color: #414141;
+$mid-gray: #d7dfe9;
 $light-gray: #f2f5f9;
 $light-green: #d7e1c1;
 $bright-color: #fff;
@@ -32,4 +33,64 @@ $cubic-transition: cubic-bezier(0,.83,.42,1.01);
     display: block;
     margin: 0 auto;
   }
+}
+
+.ax_page_title{
+  font-family: $display-font;
+  font-size: 3.2rem;
+  color: $base-color;
+ }
+
+.ax_form{
+  .ax_field{
+    display: flex;
+    flex-direction: column;    
+
+    label{
+      color: $base-color;
+      font-family: $display-font;
+      font-size: 1.4rem;
+      font-weight: 700;
+      display: block;
+      width: 100%;
+      margin-bottom: .4rem;
+    }
+
+    textarea, input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="tel"] {
+      width: 100%;
+      border-radius: .4rem;
+      border: .1rem solid $mid-gray;
+      background: $bright-color;
+      padding: 0 1.6rem;
+      color: $base-color;
+      font-family: $display-font;
+      font-size: 1.4rem;
+      display: inline-block;
+      margin-bottom: 1.6rem;
+    }
+
+    input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="tel"] {
+      height: 4rem;
+    }
+
+    small{
+      font-family: $display-font;
+      font-size: 1.4rem;
+    }
+
+    input[type="checkbox"]{
+      margin-bottom: 1.6rem;
+    }
+
+  }
+  
+}
+
+.ax_card_list{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  
 }
