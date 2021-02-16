@@ -1,17 +1,19 @@
-import { useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { parseCookies } from 'nookies';
 import Layout from '../components/Layout';
 import axios from 'axios';
 import { motion } from 'framer-motion';
-import style from '../styles/AddBroker.module.scss'
+import Processing from '../components/Processing';
+import style from '../styles/AddBroker.module.scss';
 
 
 const AddBroker = props => {
   const form = useRef(null);
+  const [processing, setProcessing] = useState({ isProcessing: false, message: '' });
 
   const setUserInfo = () => {
+    //Fetching all needed fields except upload fields
     return new Promise((res, rej) => {
-      console.log('entered Promise');
       const currForm = form.current;
       let names = currForm.elements;
       let info = {};
@@ -28,9 +30,6 @@ const AddBroker = props => {
           }
         });
       }
-
-      console.log('info:', info);
-
       res(info);
     });
   }
@@ -38,6 +37,11 @@ const AddBroker = props => {
 
   const handleForm = async (e) => {
     e.preventDefault();
+
+    setProcessing({
+      isProcessing: true,
+      message: 'Registering New Broker'
+    });
 
     //retrieving JWT Token
     let token = await props.jwt;
@@ -53,7 +57,6 @@ const AddBroker = props => {
     //Registering broker Info
     const data = await axios.post(`http://localhost:1337/auth/local/register`, finalBrokerInfo, config)
       .then(res => {
-        console.log(res)
         return res.data.user.id;
       }).then(async refId => {
 
@@ -87,27 +90,40 @@ const AddBroker = props => {
         const uploadPhoto = await axios.post('http://localhost:1337/upload', formData);
         return { fieldsData, refId }
 
-      }).then(data => {
-        console.log(data)
-        const formData = new FormData();
+      }).then(async data => {
+        //Uploading Broker Logo if Cobranded
         const fieldsData = data.fieldsData;
-        const refId = data.refId;
-        formData.append('refId', refId);
-        formData.append('ref', 'user');
-        formData.append('source', 'users-permissions');
 
         fieldsData.filter(field => {
           if (field.name === 'logoHeader2') {
-            formData.append('field', 'logoHeader2');
-            const logoHeader2 = field.files[0];
-            formData.append('files', logoHeader2, logoHeader2.name);
-          }
-        })
+            if (field.files.length > 0) {
+              const formData = new FormData();
+              const refId = data.refId;
+              formData.append('refId', refId);
+              formData.append('ref', 'user');
+              formData.append('source', 'users-permissions');
+              formData.append('field', 'logoHeader2');
+              const logoHeader2 = field.files[0];
+              formData.append('files', logoHeader2, logoHeader2.name);
 
-        return axios.post('http://localhost:1337/upload', formData)
+              return axios.post('http://localhost:1337/upload', formData)
+            }
+          } else {
+            return;
+          }
+        });
+
+        return fieldsData;
 
       }).then(data => {
-        console.log('Register finished!', data)
+        data.forEach(field => {
+          field.value = '';
+        });
+        setProcessing({
+          isProcessing: false,
+          message: ''
+        });
+        console.log('Register finished!')
       }).catch(error => {
         console.log(error)
         console.error;
@@ -122,9 +138,12 @@ const AddBroker = props => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <Layout>
+      <Layout >
         <h1 className={style.ax_page_title}>Add Broker</h1>
+
         <form className={`${style.ax_add_broker_form} ${style.ax_form}`} ref={form} onSubmit={e => handleForm(e)}>
+          <Processing processing={processing.isProcessing} message={processing.message} />
+
           <div className={style.ax_field}>
             <label htmlFor="username">Username</label>
             <input type="text" name="username" placeholder="Username" ></input>
