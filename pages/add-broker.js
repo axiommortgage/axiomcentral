@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 import Processing from '../components/Processing';
 import style from '../styles/AddBroker.module.scss';
 
-
 const AddBroker = props => {
   const form = useRef(null);
   const [processing, setProcessing] = useState({ isProcessing: false, message: '' });
@@ -77,7 +76,6 @@ const AddBroker = props => {
               data.append('field', 'photo');
               const photo = field.files[0];
               data.append('files', photo, photo.name);
-
             }
           }
         });
@@ -130,7 +128,6 @@ const AddBroker = props => {
           message: 'Yay! A new Broker has been added.',
           showToast: true
         });
-        console.log('Register finished!')
       }).catch(error => {
         setToast({
           toastType: 'error',
