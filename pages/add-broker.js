@@ -10,6 +10,8 @@ import style from '../styles/AddBroker.module.scss';
 const AddBroker = props => {
   const form = useRef(null);
   const [processing, setProcessing] = useState({ isProcessing: false, message: '' });
+  const [toast, setToast] = useState({ toastType: '', showToast: true, message: '' });
+
 
   const setUserInfo = () => {
     //Fetching all needed fields except upload fields
@@ -123,10 +125,18 @@ const AddBroker = props => {
           isProcessing: false,
           message: ''
         });
+        setToast({
+          toastType: 'success',
+          message: 'Yay! A new Broker has been added.',
+          showToast: true
+        });
         console.log('Register finished!')
       }).catch(error => {
-        console.log(error)
-        console.error;
+        setToast({
+          toastType: 'error',
+          message: 'Ooops! Something went wrong. Please check if you missed any information on the form below.',
+          showToast: true
+        });
       });
 
     return data;
@@ -138,7 +148,7 @@ const AddBroker = props => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <Layout >
+      <Layout showToast={toast.showToast} message={toast.message} toastType={toast.toastType}>
         <h1 className={style.ax_page_title}>Add Broker</h1>
 
         <form className={`${style.ax_add_broker_form} ${style.ax_form}`} ref={form} onSubmit={e => handleForm(e)}>

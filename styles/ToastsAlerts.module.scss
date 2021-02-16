@@ -1,0 +1,71 @@
+@import 'theme';
+
+.ax_toast {
+  width: 40rem;
+  height: auto;
+  display: grid;
+  grid-template-columns: 34rem 4rem;
+  grid-template-areas: 
+  'title button'
+  'content content'
+  ;  
+  padding: 1.6rem;
+  border-radius: .8rem;
+  background: white;
+  box-shadow: $shadow-large;
+  position: fixed;
+  top: 8.8rem;
+  right: .8rem;
+  z-index: 500;
+  transform: translateY(-30rem);
+  opacity: 0;
+  transition: all 0.5s ease-out;
+
+  button{
+    width: 3.2rem;
+    height: 3.2rem;
+    grid-area: button;
+    border: none;
+    color: $highlight-color;
+    background: $bright-color;
+    border-radius: .4rem;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  h3{
+    grid-area: title;
+    width: calc(100% - 1.6rem);
+    font-family: $display-font;
+    font-size: 1.6rem;
+    margin: 0;
+  }
+
+  p{
+    font-family: $body-font;
+    font-size: 1.4rem; 
+    color: $base-color;
+  }
+}
+
+.ax_toast_success {
+  transform: translateY(0);
+  opacity: 1;
+
+  h3{
+    color: $highlight-color;
+  }
+}
+
+.ax_toast_error {
+  transform: translateY(0);
+  opacity: 1;
+
+  h3{
+    color: red;
+  }
+}
+
+.ax_toast_hidden {
+  display: none;
+}
