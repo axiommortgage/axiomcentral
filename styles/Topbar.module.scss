@@ -1,6 +1,23 @@
 @import 'theme';
 @import 'mixins';
 
+.ax_loading_bar {
+  background: $highlight-color !important;
+  height: .8rem !important;
+  z-index: 2000;
+  .ax_loading_peg {
+    box-shadow: none !important;
+  }
+}
+
+.ax_loading_spinner {
+  z-index: 2000;
+  .ax_loading_spinner_icon{
+    border-top-color: $highlight-color !important;
+    border-left-color: $highlight-color !important;
+  }
+}
+
 .ax_topbar{
   grid-area: topbar;
   width: 100vw;

@@ -60,7 +60,7 @@ $cubic-transition: cubic-bezier(0,.83,.42,1.01);
       width: 100%;
       border-radius: .4rem;
       border: .1rem solid $mid-gray;
-      background: $bright-color;
+      background: $light-gray;
       padding: 0 1.6rem;
       color: $base-color;
       font-family: $display-font;
@@ -80,6 +80,17 @@ $cubic-transition: cubic-bezier(0,.83,.42,1.01);
 
     input[type="checkbox"]{
       margin-bottom: 1.6rem;
+    }
+
+    input[type="submit"]{
+      height: 4rem;
+      border-radius: .4rem;
+      background: $highlight-color;
+      color: $bright-color;
+      font-family: $display-font;
+      font-size: 1.6rem;
+      font-weight: 600;
+      border: none;
     }
 
   }
