@@ -42,6 +42,15 @@ $cubic-transition: cubic-bezier(0,.83,.42,1.01);
  }
 
 .ax_form{
+  .ax_form_heading{
+    width: 100%;
+    margin-bottom: 1.6rem;
+
+    p{
+      font-size: 1.6rem;
+      font-family: $body-font;
+    }
+  }
   .ax_field{
     display: flex;
     flex-direction: column;    
@@ -54,6 +63,12 @@ $cubic-transition: cubic-bezier(0,.83,.42,1.01);
       display: block;
       width: 100%;
       margin-bottom: .4rem;
+
+      span{
+        color: red;
+        font-weight: 800;
+        font-size: 1.6rem;
+      }
     }
 
     textarea, input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="tel"] {

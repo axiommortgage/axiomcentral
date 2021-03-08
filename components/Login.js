@@ -17,7 +17,7 @@ const Login = props => {
       password: password
     }
 
-    const data = axios.post(`http://localhost:1337/auth/local`, loginInfo).then(res => {
+    const data = axios.post(`https://axiomapi.herokuapp.com/auth/local`, loginInfo).then(res => {
 
       let jwt = res.data.jwt;
 
