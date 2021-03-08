@@ -140,6 +140,8 @@ const AddBroker = props => {
     });
   }
 
+  const API_URL = `${process.env.API_URL}`;
+
   const handleForm = async (e) => {
     e.preventDefault();
 
@@ -161,8 +163,9 @@ const AddBroker = props => {
         }
       }
 
+
       //Registering broker Info
-      const data = await axios.post(`https://axiomapi.herokuapp.com/auth/local/register`, finalBrokerInfo.formInfo, config)
+      const data = await axios.post(`${API_URL}/auth/local/register`, finalBrokerInfo.formInfo, config)
         .then(res => {
           return res.data.user.id;
         }).then(async refId => {
@@ -193,7 +196,7 @@ const AddBroker = props => {
           const formData = data.data;
           const refId = data.refId;
           const fieldsData = data.fieldsData;
-          const uploadPhoto = await axios.post('https://axiomapi.herokuapp.com/upload', formData);
+          const uploadPhoto = await axios.post(`${API_URL}/upload`, formData);
           return { fieldsData, refId }
 
         }).then(async data => {
@@ -212,7 +215,7 @@ const AddBroker = props => {
                 const logoHeader2 = field.files[0];
                 formData.append('files', logoHeader2, logoHeader2.name);
 
-                return axios.post('https://axiomapi.herokuapp.com/upload', formData)
+                return axios.post(`${API_URL}/upload`, formData)
               }
             } else {
               return;

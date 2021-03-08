@@ -33,8 +33,10 @@ const AllBrokers = props => {
   )
 }
 
+const API_URL = `${process.env.API_URL}`;
+
 export const getStaticProps = async () => {
-  const data = await axios.get('https://axiomapi.herokuapp.com/users').then(res => {
+  const data = await axios.get(`${API_URL}/users`).then(res => {
     var users = res.data;
     return users;
   }).catch(err => {
