@@ -69,3 +69,16 @@
 .ax_toast_hidden {
   display: none;
 }
+
+.ax_tip{
+  font-family: $display-font;
+  border-left: .4rem solid $highlight-color;
+  background: $light-gray;
+  color: $base-color;
+  border-radius: 0 .8rem .8rem 0;
+  padding: .8rem; 
+
+  span{
+    color: $highlight-color;
+  }
+}

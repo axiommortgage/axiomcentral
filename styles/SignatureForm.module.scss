@@ -1,54 +1,14 @@
-$highlight-color: #84bd00;
-$base-color: #000;
-$base-mid-color: #414141;
-$mid-gray: #d7dfe9;
-$light-gray: #f2f5f9;
-$light-green: #d7e1c1;
-$bright-color: #fff;
-$display-font: 'Montserrat', sans-serif;
-$body-font: 'Open Sans', sans-serif;
-$shadow: 2px 2px 8px rgba(45, 44, 48, 0.15);
-$shadow-large: 8px 8px 24px rgba(45, 44, 48, 0.15);
-$cubic-transition: cubic-bezier(0,.83,.42,1.01);
-
-
-@media screen and (min-width: 0) and (max-width: 767px){
-  .ax_container{
-    width: 90%;
-    display: block;
-    margin: 0 auto; 
-
-    p{
-      font-family: $body-font;
-      font-size: 1.4rem;
-      color: $base-color;
-    }   
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1199px){
-  .ax_container{
-    width: 74rem;
-    display: block;
-    margin: 0 auto;
-  }
-}
-
-@media screen and (min-width: 1200px){
-  .ax_container{
-    width: 114rem;
-    display: block;
-    margin: 0 auto;
-  }
-}
-
-.ax_page_title{
-  font-family: $display-font;
-  font-size: 3.2rem;
-  color: $base-color;
- }
-
+@import 'theme';
+@import 'mixins';
 .ax_form{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background: $bright-color;
+  padding: 3.2rem;
+  border-radius: .8rem;
+  margin-bottom: 4rem;
+
   .ax_form_heading{
     width: 100%;
     margin-bottom: 1.6rem;
@@ -63,7 +23,7 @@ $cubic-transition: cubic-bezier(0,.83,.42,1.01);
     flex-direction: column;    
 
     label{
-      color: $base-color;
+      color: darken($highlight-color, 10);
       font-family: $display-font;
       font-size: 1.4rem;
       font-weight: 700;
@@ -85,10 +45,15 @@ $cubic-transition: cubic-bezier(0,.83,.42,1.01);
       background: $light-gray;
       padding: 0 1.6rem;
       color: $base-color;
-      font-family: $display-font;
+      font-family: $body-font;
       font-size: 1.4rem;
       display: inline-block;
       margin-bottom: 1.6rem;
+      font-weight: 400;
+
+      &::placeholder{
+        font-weight: 400;
+      }
     }
 
     input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="tel"] {
@@ -116,14 +81,30 @@ $cubic-transition: cubic-bezier(0,.83,.42,1.01);
     }
 
   }
-  
 }
 
-.ax_card_list{
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  
+@include responsive(desktop){
+  .ax_form{  
+    .ax_field{
+      width: 100%;      
+    }
+  }
+}
+
+@include responsive(tablet){
+  .ax_form{  
+
+    .ax_field{
+      width: 100%;
+    }
+  }
+}
+
+@include responsive(mobile){
+  .ax_form{  
+ 
+    .ax_field{
+      width: 100%;
+    }
+  }
 }

@@ -1,0 +1,87 @@
+@import 'theme';
+@import 'mixins';
+
+.lendersTable{
+  width: 100%;
+  cursor: grab;
+
+  table{
+    display: table;
+    font-family: $display-font;
+    background: $bright-color;
+    padding: 3.2rem;
+    border-radius: .8rem;
+
+    thead, tbody{
+      width: 100%;
+
+      tr{
+        th{
+          font-size: 1rem;
+          border-bottom: .2rem solid $mid-gray;
+          height: 3.4rem;
+          vertical-align: middle;
+          line-height: 1.2rem;
+          padding: 0 .8rem;
+          text-align: left;
+        }
+
+        td{
+          font-size: 1rem;
+          font-size: 1rem;
+          border-bottom: .1rem solid $mid-gray;
+          height: 3.4rem;
+          vertical-align: middle;
+          line-height: 1.2rem;
+          padding: .4rem .8rem;
+          transition: all .2s ease-out;
+
+          &:nth-child(1){
+            min-width: 10rem;
+            font-weight: 700;
+          }
+
+          &:nth-child(2), &:nth-child(4), &:nth-child(5), &:nth-child(6), &:nth-child(7), &:nth-child(8), &:nth-child(9), &:nth-child(11), &:nth-child(12){
+            min-width: 12rem;
+          }
+
+          &:nth-child(3), &:nth-child(15){
+            min-width: 20rem;
+          }
+        }
+
+        &:hover{
+          td{
+            background-color: $light-gray
+          }
+        }
+      }    
+    }
+  }    
+}
+
+@include responsive(desktop){
+  .ax_add_broker_form{  
+    width: 100rem;
+  }
+}
+
+@include responsive(tablet){
+  .ax_add_broker_form{  
+    width: 70rem;
+
+    .ax_field{
+      width: 100%;
+    }
+  }
+}
+
+@include responsive(mobile){
+  .ax_add_broker_form{  
+    width: 100%;
+
+    .ax_field{
+      width: 100%;
+    }
+  }
+}
