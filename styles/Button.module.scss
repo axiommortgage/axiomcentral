@@ -8,6 +8,13 @@
   font-family: $display-font;
   text-decoration: none;
   cursor: pointer;
+
+  > img, svg{
+    display: inline-block;
+    width: 3.6rem !important;
+    height: 3.6rem !important;
+    vertical-align: middle;
+  }
 }
 
 .ax_btn_small{
