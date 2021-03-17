@@ -116,6 +116,8 @@ export const getStaticProps = async () => {
     console.log(err)
   });
 
+  console.log('#############DATA##############: ', data)
+
   return {
     props: {
       lenders: data
