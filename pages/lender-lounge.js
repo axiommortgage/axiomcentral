@@ -6,6 +6,7 @@ import axios from 'axios';
 import style from '../styles/Lenders.module.scss';
 import alerts from '../styles/ToastsAlerts.module.scss';
 import ScrollContainer from 'react-indiana-drag-scroll';
+import getJwt from '../helpers/formatCookie';
 
 const AllLenders = props => {
 
@@ -108,16 +109,23 @@ const AllLenders = props => {
 
 const API_URL = `${process.env.API_URL}`;
 
-export const getStaticProps = async () => {
-  const data = await axios.get(`${API_URL}/lenders`).then(res => {
+
+export const getServerSideProps = async (ctx) => {
+
+  const token = getJwt(ctx.req.headers.cookie);
+  const config = {
+    headers: {
+      Authorization: 'Bearer ' + token
+    }
+  }
+
+  const data = await axios.get(`${API_URL}/lenders`, config ).then(res => {
+
     var lenders = res.data;
-    console.log('LENDERS: ', lenders)
     return lenders;
   }).catch(err => {
     console.log(err)
   });
-
-  console.log('#############DATA##############: ', data)
 
   return {
     props: {

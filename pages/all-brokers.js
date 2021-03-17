@@ -2,6 +2,7 @@ import Layout from '../components/Layout';
 import Card from '../components/Card';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import getJwt from '../helpers/formatCookie';
 import style from '../styles/AddBroker.module.scss'
 
 const AllBrokers = props => {
@@ -23,7 +24,7 @@ const AllBrokers = props => {
               <Card
                 key={index}
                 title={`${user.firstname} ${user.lastname} `}
-                photo={user.photo.url ? user.photo.url : './images/axiom-a-logo.svg'}
+                photo={user.photo.url !== undefined ? user.photo.url : './images/axiom-a-logo.svg'}
               />
             )
           })}
@@ -35,8 +36,14 @@ const AllBrokers = props => {
 
 const API_URL = `${process.env.API_URL}`;
 
-export const getStaticProps = async () => {
-  const data = await axios.get(`${API_URL}/users`).then(res => {
+export const getServerSideProps = async (ctx) => {
+  const token = getJwt(ctx.req.headers.cookie);
+  const config = {
+    headers: {
+      Authorization: 'Bearer ' + token
+    }
+  }
+  const data = await axios.get(`${API_URL}/users`, config).then(res => {
     var users = res.data;
     return users;
   }).catch(err => {

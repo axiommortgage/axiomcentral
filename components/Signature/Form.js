@@ -7,42 +7,43 @@ const Form = () => {
   const form = useRef(null);
 
   let fieldsInfo = {
-    name: null,
-    aftername: null,
-    position: null,
-    license: null,
-    email: null,
-    phone: null,
-    brokerage: null,
-    website: null,
-    applicationLink: null,
-    instagram: null,
-    facebook: null,
-    twitter: null,
-    linkedin: null,
-    youtube: null
+    name: '',
+    aftername: '',
+    position: '',
+    license: '',
+    email: '',
+    phone: '',
+    brokerage: '',
+    website: '',
+    applicationLink: '',
+    instagram: '',
+    facebook: '',
+    twitter: '',
+    linkedin: '',
+    youtube: ''
   };
 
   const [formInfo, setFormInfo] = useState(fieldsInfo);
   const [context, setContext] = useContext(SignatureContext);
+  const [processing, setProcessing] = useState(false);
 
   const generateSignature = e => {
     e.preventDefault();
     let info = form.current.children;
     let infoArr = Array.from(info);
-    console.log(typeof (infoArr));
 
     let signatureData = {};
 
     for (let i in infoArr) {
       let item = infoArr[i].querySelector('input');
+      console.log(item)
       let itemName = item.name;
       let itemValue;
 
       if (item.value) {
         itemValue = item.value;
       } else {
-        itemValue = null;
+        itemValue = '';
       }
       signatureData = { ...signatureData, [itemName]: itemValue }
 
@@ -56,6 +57,7 @@ const Form = () => {
   }
 
   return (
+    <>
     <form className={style.ax_form} onSubmit={e => generateSignature(e)} ref={form}>
       <div className={style.ax_field}>
         <label htmlFor="name">Name</label>
@@ -120,13 +122,14 @@ const Form = () => {
       <div className={style.ax_field}>
         <label htmlFor="applicationLink">Mortgage Application Link</label>
         <input type="text" name="applicationLink" placeholder="I.E: https://mtgapp.scarlettnetwork.com/broker-name/home"  ></input>
-      </div>
-
-      <div className={style.ax_field}>
-        <input type="submit" value="Generate Signature" ></input>
-      </div>
+      </div>      
 
     </form >
+
+    <div className={style.ax_field}>
+      <button className={style.ax_btn_submit} type="submit" onClick={e => generateSignature(e)} >{processing ? <img src="/images/spinner-white.svg" /> : ''}Generate Signature</button>
+    </div>
+    </>
   )
 }
 

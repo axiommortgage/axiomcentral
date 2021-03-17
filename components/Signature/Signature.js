@@ -1,12 +1,13 @@
 import SignatureContext from '../../helpers/SignatureContext';
-import { useContext, useRef } from 'react';
+import { useContext, useRef, useState } from 'react';
 import SocialIcons from './SocialIcons';
 import style from '../../styles/Signature.module.scss';
+import Toast from '../Toast';
 
 const Signature = props => {
 
   const signatureHTML = useRef(null);
-
+  const [processing, setProcessing] = useState(false);
   const [context, setContext] = useContext(SignatureContext);
 
   const networks = () => {
@@ -30,16 +31,17 @@ const Signature = props => {
   //Copying HTML Email Signature
   const copyHtml = (e) => {
     e.preventDefault();
+    setProcessing(true);
     const signature = signatureHTML.current;
     var range = document.createRange();
     range.selectNode(signature);
     window.getSelection().removeAllRanges();
     window.getSelection().addRange(range);
     document.execCommand('copy');
+    setTimeout(()=>{
+      setProcessing(false);
+    }, 3000)
   }
-
-
-
 
 
   return (
@@ -97,6 +99,8 @@ const Signature = props => {
         </tbody>
       </table>
       <button className={style.ax_btn_copy} onClick={e => copyHtml(e)}>Copy Signature</button>
+
+      <Toast showToast={processing} toastType="success" message="Your signature was copied to clipboard. Paste it on your signature area."/>
     </>
   )
 }

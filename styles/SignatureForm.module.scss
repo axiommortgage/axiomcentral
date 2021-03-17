@@ -67,9 +67,12 @@
 
     input[type="checkbox"]{
       margin-bottom: 1.6rem;
-    }
+    }    
 
-    input[type="submit"]{
+  }
+}
+
+.ax_btn_submit{
       height: 4rem;
       border-radius: .4rem;
       background: $highlight-color;
@@ -78,15 +81,22 @@
       font-size: 1.6rem;
       font-weight: 600;
       border: none;
+      padding: 0 2.4rem;
+      float: right;
+
+      > img, svg{
+        display: inline-block;
+        width: 3.6rem !important;
+        height: 3.6rem !important;
+        vertical-align: middle;
+      }
     }
 
-  }
-}
 
 @include responsive(desktop){
   .ax_form{  
     .ax_field{
-      width: 100%;      
+      width: calc(50% - 1.6rem);      
     }
   }
 }

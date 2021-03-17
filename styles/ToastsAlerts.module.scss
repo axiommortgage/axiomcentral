@@ -3,7 +3,6 @@
 .ax_toast {
   width: 40rem;
   height: auto;
-  display: grid;
   grid-template-columns: 34rem 4rem;
   grid-template-areas: 
   'title button'
@@ -69,6 +68,11 @@
 .ax_toast_hidden {
   display: none;
 }
+
+.ax_toast_visible {
+  display: grid;
+}
+
 
 .ax_tip{
   font-family: $display-font;
