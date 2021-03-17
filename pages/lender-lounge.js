@@ -10,45 +10,45 @@ import ScrollContainer from 'react-indiana-drag-scroll';
 const AllLenders = props => {
 
   const lenders = props.lenders;
-  const headers=['Lender', 'Submission Agent/Agent Name', 'Set Up Requirements / Allowing for new broker sign ups', 'BDM', 'BDM Email', 'BDM Phone', 'Underwriter', 'Underwriter Email', 'Underwriter Phone', 'Portal Website', 'User ID', 'Password',  'Email Notifications', 'Documents', 'Notes'];
+  const headers = ['Lender', 'Submission Agent/Agent Name', 'Set Up Requirements / Allowing for new broker sign ups', 'BDM', 'BDM Email', 'BDM Phone', 'Underwriter', 'Underwriter Email', 'Underwriter Phone', 'Portal Website', 'User ID', 'Password', 'Email Notifications', 'Documents', 'Notes'];
   console.log('LENDERS: ', lenders)
 
   const generateRows = () => {
-    const filterLenders = lenders.map((row, index) => {        
+    const filterLenders = lenders.map((row, index) => {
       let filteredObj = {};
-        
-      for(let col in row){
-        switch(col){
-          case 'name': filteredObj = {...filteredObj, [col]:row[col]}; break;
-          case 'submissionAgent': filteredObj = {...filteredObj, [col]:row[col]}; break;
-          case 'setupRequirements': filteredObj = {...filteredObj, [col]:row[col]}; break;
-          case 'bdmName': filteredObj = {...filteredObj, [col]:row[col]}; break;
-          case 'bdmEmail': filteredObj = {...filteredObj, [col]:row[col]}; break;
-          case 'bdmPhone': filteredObj = {...filteredObj, [col]:row[col]}; break;
-          case 'underwriterName': filteredObj = {...filteredObj, [col]:row[col]}; break;
-          case 'underwriterEmail': filteredObj = {...filteredObj, [col]:row[col]}; break;
-          case 'underwriterPhone': filteredObj = {...filteredObj, [col]:row[col]}; break;
-          case 'portalWebsite': filteredObj = {...filteredObj, [col]:row[col]}; break;
-          case 'userId': filteredObj = {...filteredObj, [col]:row[col]}; break;
-          case 'password': filteredObj = {...filteredObj, [col]:row[col]}; break;
-          case 'emailNotification': filteredObj = {...filteredObj, [col]:row[col]}; break;
-          case 'documents': filteredObj = {...filteredObj, [col]:row[col]}; break;
-          case 'notes': filteredObj = {...filteredObj, [col]:row[col]}; break;
-          case 'logo': filteredObj = {...filteredObj, [col]:row[col]}; break;
+
+      for (let col in row) {
+        switch (col) {
+          case 'name': filteredObj = { ...filteredObj, [col]: row[col] }; break;
+          case 'submissionAgent': filteredObj = { ...filteredObj, [col]: row[col] }; break;
+          case 'setupRequirements': filteredObj = { ...filteredObj, [col]: row[col] }; break;
+          case 'bdmName': filteredObj = { ...filteredObj, [col]: row[col] }; break;
+          case 'bdmEmail': filteredObj = { ...filteredObj, [col]: row[col] }; break;
+          case 'bdmPhone': filteredObj = { ...filteredObj, [col]: row[col] }; break;
+          case 'underwriterName': filteredObj = { ...filteredObj, [col]: row[col] }; break;
+          case 'underwriterEmail': filteredObj = { ...filteredObj, [col]: row[col] }; break;
+          case 'underwriterPhone': filteredObj = { ...filteredObj, [col]: row[col] }; break;
+          case 'portalWebsite': filteredObj = { ...filteredObj, [col]: row[col] }; break;
+          case 'userId': filteredObj = { ...filteredObj, [col]: row[col] }; break;
+          case 'password': filteredObj = { ...filteredObj, [col]: row[col] }; break;
+          case 'emailNotification': filteredObj = { ...filteredObj, [col]: row[col] }; break;
+          case 'documents': filteredObj = { ...filteredObj, [col]: row[col] }; break;
+          case 'notes': filteredObj = { ...filteredObj, [col]: row[col] }; break;
+          case 'logo': filteredObj = { ...filteredObj, [col]: row[col] }; break;
         }
       }
 
-      return filteredObj;     
+      return filteredObj;
     });
 
     console.log(filterLenders)
 
     return (
       <>
-        {filterLenders.map((item, index)=>{
-          
-            return (
-              <tr>
+        {filterLenders.map((item, index) => {
+
+          return (
+            <tr>
               <td>{item.name}</td>
               <td>{item.submissionAgent}</td>
               <td>{item.setupRequirements}</td>
@@ -65,11 +65,11 @@ const AllLenders = props => {
               <td>{item.documents}</td>
               <td>{item.notes}</td>
             </tr>
-            )                         
-          
+          )
+
         })}
       </>
-    )          
+    )
   }
 
   let theRows = generateRows();
@@ -84,23 +84,23 @@ const AllLenders = props => {
         <h1 className={style.ax_page_title}>Lender Lounge</h1>
         <h3 className={alerts.ax_tip}>Click and Drag on the table to scroll horizontally.</h3>
 
-          <ScrollContainer horizontal={true} vertical={false} className={style.lendersTable}>
+        <ScrollContainer horizontal={true} vertical={false} className={style.lendersTable}>
 
-            <table className={style.lendersTable} cellPadding="0" cellSpacing="0">
-              <thead>
-                <tr>
-                  {headers.map((item, index)=>{              
-                    return(
-                      <th key={index}>{item}</th>
-                    )
-                  })}
-                </tr>
-              </thead>
-              <tbody>
-                  {theRows}
-              </tbody>
-            </table> 
-          </ScrollContainer>        
+          <table className={style.lendersTable} cellPadding="0" cellSpacing="0">
+            <thead>
+              <tr>
+                {headers.map((item, index) => {
+                  return (
+                    <th key={index}>{item}</th>
+                  )
+                })}
+              </tr>
+            </thead>
+            <tbody>
+              {theRows}
+            </tbody>
+          </table>
+        </ScrollContainer>
       </Layout >
     </motion.div>
   )
@@ -111,6 +111,7 @@ const API_URL = `${process.env.API_URL}`;
 export const getStaticProps = async () => {
   const data = await axios.get(`${API_URL}/lenders`).then(res => {
     var lenders = res.data;
+    console.log('LENDERS: ', lenders)
     return lenders;
   }).catch(err => {
     console.log(err)

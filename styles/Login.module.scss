@@ -68,6 +68,13 @@
       transition: all .2s cubic-bezier(0.075, 0.82, 0.165, 1);
       cursor: pointer;
 
+      > img, svg{
+        display: inline-block;
+        width: 3.6rem !important;
+        height: 3.6rem !important;
+        vertical-align: middle;
+      }
+
       &:hover{
         background-color: lighten($highlight-color, 3);
       }

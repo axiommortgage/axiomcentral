@@ -9,9 +9,13 @@ const Login = props => {
   const route = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [processing, setProcessing] = useState(false);
+
 
   const handleLogin = (e) => {
     e.preventDefault();
+    console.log('BTNNNNN')
+    setProcessing(true);
     let loginInfo = {
       identifier: username,
       password: password
@@ -20,6 +24,7 @@ const Login = props => {
     const API_URL = `${process.env.API_URL}/auth/local`;
 
     const data = axios.post(API_URL, loginInfo).then(res => {
+      setProcessing(false);
 
       let jwt = res.data.jwt;
 
@@ -34,6 +39,7 @@ const Login = props => {
       route.push('/dashboard');
 
     }).catch(error => {
+      setProcessing(false);
       console.log(error)
       route.push('/');
     });
@@ -54,7 +60,7 @@ const Login = props => {
           <label htmlFor="password">Password</label>
           <input type="password" name="password" placeholder="Password" onChange={e => setPassword(e.target.value)}></input>
 
-          <button type="submit" onClick={e => handleLogin(e)}>Login</button>
+          <button type="submit" onClick={e => handleLogin(e)}>{processing ? <img src="/images/spinner-white.svg" /> : ''}Login</button>
         </form>
         <Link href="/">Forgot your password? Click here.</Link>
       </div>
