@@ -1,0 +1,34 @@
+@import 'theme';
+
+.ax_notification_list {
+  width: 38rem;
+  max-height: 40rem;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: $bright-color;
+  box-shadow: $shadow;
+  border-radius: 1.6rem;
+  position: absolute;
+  top: 4rem;
+  left: 0;
+  z-index: 1000;
+  box-sizing: border-box;
+  padding: 1.6rem;
+  opacity: 0;
+  transform: translateY('-32px');
+  transition: all .5s ease-out;
+
+  > div {
+    margin-bottom: .8rem;
+  }
+}
+
+.ax_notifications_visible{
+  display: flex;
+  opacity: 1;
+  transform: translateY('0');
+}
+
+.ax_notifications_hidden{
+  display: none;
+}

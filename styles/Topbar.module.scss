@@ -45,6 +45,43 @@
     width: 50rem;
     display: flex;
     justify-content: flex-end;
+    position: relative;
+
+    .ax_noftfs_button{
+      background: transparent;
+      border: none;
+      width: 4rem;
+      height: 4rem;
+      margin-right: 3.2rem;
+      outline: none;
+      cursor: pointer;
+      position: relative;
+
+      span{
+        width: 1.8rem;
+        height: 1.8rem;
+        border-radius: 50%;
+        text-align: center;
+        background: red;
+        color: $bright-color;
+        display: block;
+        font-size: 1rem;
+        font-weight: 600;
+        font-family: $display-font;
+        line-height: 1.6rem;
+        position: absolute;
+        top: -.4rem;
+        right: 0rem;
+      }
+    }
+
+    svg{
+      color: $highlight-color;
+
+      &:hover{
+        color: $base-color;
+      }
+    }
 
     h3 {
       font-family: $display-font;
