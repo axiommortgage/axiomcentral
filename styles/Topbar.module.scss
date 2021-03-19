@@ -40,4 +40,19 @@
       width: auto;
     }
   }
+
+  .ax_topbar_actions {
+    width: 50rem;
+    display: flex;
+    justify-content: flex-end;
+
+    h3 {
+      font-family: $display-font;
+      margin-right: 1.6rem;
+      text-transform: capitalize;
+      color: $base-color;
+    }
+  }
+
+  
 }

@@ -1,5 +1,10 @@
 import Router from 'next/router'
 import NProgress from 'nprogress';
+import {useState, useContext, useEffect} from 'react';
+import AuthContext from '../context/authContext';
+import nookies from 'nookies';
+import axios from 'axios';
+import Avatar from './Avatar';
 import styles from '../styles/Topbar.module.scss';
 
 export const customLoader = () => {
@@ -27,11 +32,48 @@ Router.events.on('routeChangeStart', (url) => {
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
+const API_URL = `${process.env.API_URL}`;
+
 const Topbar = props => {
+  const {userAuth, setUserAuth} = useContext(AuthContext);
+  const setUser = async () => {
+    const obj = JSON.parse(JSON.stringify(nookies.get('jwt')));
+    const token = Object.keys(obj).map(function (key) { return obj[key]; });
+
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + token[0]
+      }
+    }
+
+    const data = await axios.get(`${API_URL}/users/me`, config).then(res => {
+      var me = res.data;
+      setUserAuth({...userAuth, userInfo: me});
+
+    }).catch(err => {
+      console.log(err)
+    });
+
+    return data;
+  }
+
+  useEffect(()=>{
+    setUser();   
+  }, []);
+
+
   return (
     <header className={styles.ax_topbar}>
       <div className={styles.ax_logo}>
         <img src="./images/logo.svg" alt="axiom central logo" />
+      </div>
+      <div className={styles.ax_topbar_actions} >
+        {userAuth.userInfo ? 
+          <>
+            <h3>{userAuth.userInfo.firstname} {userAuth.userInfo.lastname}</h3>
+            <Avatar photoUrl={userAuth.userInfo.photo.url} size={40} /> 
+          </>
+        : '' }
       </div>
     </header>
   )
