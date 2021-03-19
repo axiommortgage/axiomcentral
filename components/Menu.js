@@ -17,10 +17,10 @@ const Menu = props => {
           <Link href="/branding"> Branding</Link>
         </div> */}
 
-        {/* <div className={styles.ax_menu_item}>
+        <div className={styles.ax_menu_item}>
           <UilServerNetworkAlt size={20} />
           <Link href="/technology"> Technology</Link>
-        </div> */}
+        </div>
 
         {/* <div className={styles.ax_menu_item}>
           <UilMegaphone size={20} />

@@ -4,10 +4,11 @@
   display: table;
   width: auto;
   border-radius: .4rem; 
-  text-transform: uppercase; 
   font-family: $display-font;
+  font-weight: 600;
   text-decoration: none;
   cursor: pointer;
+  transition: all .5s ease-out;
 
   > img, svg{
     display: inline-block;
@@ -44,6 +45,7 @@
   font-size: 2.1rem;
   padding: 0 4rem;
 }
+
 .ax_btn_highlight{
   background: $highlight-color;
   color: $bright-color;
