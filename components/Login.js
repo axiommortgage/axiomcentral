@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
+import AuthContext from '../context/authContext';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styles from '../styles/Login.module.scss';
@@ -10,7 +11,7 @@ const Login = props => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [processing, setProcessing] = useState(false);
-
+  const {userAuth, setUserAuth} = useContext(AuthContext);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -27,6 +28,9 @@ const Login = props => {
       setProcessing(false);
 
       let jwt = res.data.jwt;
+      let user = res.data.user;
+
+      setUserAuth({isAuth: true, userInfo: res.data.user});
 
       setCookie(null, 'jwt', jwt, {
         maxAge: 30 * 24 * 60 * 60,
@@ -47,6 +51,7 @@ const Login = props => {
     return data;
 
   }
+
 
   return (
     <section className={styles.ax_login}>

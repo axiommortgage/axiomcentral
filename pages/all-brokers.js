@@ -8,7 +8,7 @@ import style from '../styles/AddBroker.module.scss'
 const AllBrokers = props => {
 
   const users = props.users;
-  console.log(users);
+  console.log(users)
 
   return (
     <motion.div
@@ -19,12 +19,12 @@ const AllBrokers = props => {
       <Layout>
         <h1 className={style.ax_page_title}>All Brokers</h1>
         <div className={style.ax_card_list}>
-          {users.map((user, index) => {
+          {users.map((user, index) => {            
             return (
               <Card
                 key={index}
                 title={`${user.firstname} ${user.lastname} `}
-                photo={user.photo.url !== undefined ? user.photo.url : './images/axiom-a-logo.svg'}
+                photo={typeof(user.photo) !== 'undefined' ? user.photo.url : './images/axiom-a-logo.svg'}
               />
             )
           })}
@@ -44,7 +44,7 @@ export const getServerSideProps = async (ctx) => {
     }
   }
   const data = await axios.get(`${API_URL}/users`, config).then(res => {
-    var users = res.data;
+    var users = JSON.parse(JSON.stringify(res.data));
     return users;
   }).catch(err => {
     console.log(err)
