@@ -112,24 +112,34 @@ const API_URL = `${process.env.API_URL}`;
 
 export const getServerSideProps = async (ctx) => {
 
-  const token = getJwt(ctx.req.headers.cookie);
-  const config = {
-    headers: {
-      Authorization: 'Bearer ' + token
+  if (ctx.req.headers.cookie) {
+    const token = getJwt(ctx.req.headers.cookie);
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
     }
-  }
 
-  const data = await axios.get(`${API_URL}/lenders`, config ).then(res => {
+    const data = await axios.get(`${API_URL}/lenders`, config).then(res => {
 
-    var lenders = res.data;
-    return lenders;
-  }).catch(err => {
-    console.log(err)
-  });
+      var lenders = res.data;
+      return lenders;
+    }).catch(err => {
+      console.log(err)
+    });
 
-  return {
-    props: {
-      lenders: data
+    return {
+      props: {
+        lenders: data
+      },
+      revalidate: 60
+    }
+  } else {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      }
     }
   }
 }

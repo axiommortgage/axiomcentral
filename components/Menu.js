@@ -1,6 +1,7 @@
+import { logout } from '../auth/auth';
 import styles from '../styles/Menu.module.scss';
 import Link from 'next/link';
-import { UilBooks, UilEnvelopeAlt, UilEditAlt, UilFolder, UilFidgetSpinner, UilSchedule, UilAward, UilStar, UilHeart, UilShieldCheck, UilMoneyWithdraw, UilGlobe, UilUniversity, UilMegaphone, UilCalender, UilApps, UilUser, UilUserPlus, UilBullseye, UilServerNetworkAlt, UilClinicMedical, UilUsdCircle } from '@iconscout/react-unicons';
+import { UilSignOutAlt, UilBooks, UilEnvelopeAlt, UilEditAlt, UilFolder, UilFidgetSpinner, UilSchedule, UilAward, UilStar, UilHeart, UilShieldCheck, UilMoneyWithdraw, UilGlobe, UilUniversity, UilMegaphone, UilCalender, UilApps, UilUser, UilUserPlus, UilBullseye, UilServerNetworkAlt, UilClinicMedical, UilUsdCircle } from '@iconscout/react-unicons';
 
 
 const Menu = props => {
@@ -116,6 +117,11 @@ const Menu = props => {
         <div className={styles.ax_menu_item}>
           <UilUser size={20} />
           <Link href="/all-brokers"> All Brokers</Link>
+        </div>
+
+        <div className={styles.ax_menu_item}>
+          <UilSignOutAlt size={20} />
+          <a onClick={logout}> Logout</a>
         </div>
       </nav>
     </aside>

@@ -37,22 +37,33 @@ const AllBrokers = props => {
 const API_URL = `${process.env.API_URL}`;
 
 export const getServerSideProps = async (ctx) => {
-  const token = getJwt(ctx.req.headers.cookie);
-  const config = {
-    headers: {
-      Authorization: 'Bearer ' + token
-    }
-  }
-  const data = await axios.get(`${API_URL}/users`, config).then(res => {
-    var users = res.data;
-    return users;
-  }).catch(err => {
-    console.log(err)
-  });
+  if (ctx.req.headers.cookie) {
 
-  return {
-    props: {
-      users: data
+    const token = getJwt(ctx.req.headers.cookie);
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    }
+    const data = await axios.get(`${API_URL}/users`, config).then(res => {
+      var users = res.data;
+      return users;
+    }).catch(err => {
+      console.log(err)
+    });
+
+    return {
+      props: {
+        users: data
+      }
+    }
+
+  } else {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
     }
   }
 }

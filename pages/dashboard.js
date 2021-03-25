@@ -1,4 +1,5 @@
-import { parseCookies } from 'nookies';
+import { useContext } from 'react';
+import AuthContext from '../context/authContext';
 import getJwt from '../helpers/formatCookie';
 import Layout from '../components/Layout';
 import style from '../styles/Dashboard.module.scss';
@@ -8,20 +9,20 @@ import Markdown from '../components/Markdown';
 import axios from 'axios';
 
 const Dashboard = props => {
-  const {notifications} = props;
-  console.log('N: ', notifications)
+  const { notifications } = props;
+
   return (
     <Layout>
       <h1 className={style.ax_page_title}>Dashboard</h1>
       <div className={alerts.ax_tip}>
-      {notifications.map((item, index) => {
-        return(
-          <>
-            <h3>{item.title}</h3>
-            <Markdown>{item.content}</Markdown>
-          </>
-        )
-      })}
+        {notifications.map((item, index) => {
+          return (
+            <>
+              <h3>{item.title}</h3>
+              <Markdown>{item.content}</Markdown>
+            </>
+          )
+        })}
       </div>
       <div className={style.ax_card_list}>
         <Card iconSquared="./images/branding.svg" title="Branding" description="Logos, graphics and guidelines" />
@@ -40,25 +41,37 @@ const API_URL = `${process.env.API_URL}`;
 
 export const getServerSideProps = async (ctx) => {
 
-  const token = getJwt(ctx.req.headers.cookie);
-  const config = {
-    headers: {
-      Authorization: 'Bearer ' + token
+  if (ctx.req.headers.cookie) {
+    const token = getJwt(ctx.req.headers.cookie);
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
     }
-  }
-  const data = await axios.get(`${API_URL}/notifications`, config).then(res => {
-    var notifications = res.data;
-    return notifications;
-  }).catch(err => {
-    console.log(err)
-  });
 
-  
-  return {
-    props: {
-      notifications: data
+    const data = await axios.get(`${API_URL}/notifications`, config).then(res => {
+      var notifications = res.data;
+      return notifications;
+    }).catch(err => {
+      console.log(err)
+    });
+
+
+    return {
+      props: {
+        notifications: data
+      },
+      revalidate: 60
+    }
+  } else {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
     }
   }
+
 }
 
 export default Dashboard;

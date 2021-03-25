@@ -24,17 +24,4 @@ const Home = props => {
   )
 }
 
-export const getServerSideProps = async (ctx) => {
-
-  let auth = parseCookies(ctx).jwt;
-
-  if (auth) {
-  }
-  return {
-    props: {
-
-    }
-  }
-}
-
 export default Home;
