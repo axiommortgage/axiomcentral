@@ -48,8 +48,7 @@ export const getServerSideProps = async ctx => {
     return {
       props: {
         notifications: data
-      },
-      revalidate: 60
+      }
     }
   } else {
     return {

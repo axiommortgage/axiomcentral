@@ -45,8 +45,7 @@ export const getServerSideProps = async (ctx) => {
     return {
       props: {
         techs: data
-      },
-      revalidate: 60
+      }
     }
   } else {
     return {

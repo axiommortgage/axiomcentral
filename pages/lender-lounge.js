@@ -131,8 +131,7 @@ export const getServerSideProps = async (ctx) => {
     return {
       props: {
         lenders: data
-      },
-      revalidate: 60
+      }
     }
   } else {
     return {
