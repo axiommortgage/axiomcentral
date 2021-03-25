@@ -9,21 +9,9 @@ import Markdown from '../components/Markdown';
 import axios from 'axios';
 
 const Dashboard = props => {
-  const { notifications } = props;
-
   return (
     <Layout>
       <h1 className={style.ax_page_title}>Dashboard</h1>
-      <div className={alerts.ax_tip}>
-        {notifications.map((item, index) => {
-          return (
-            <>
-              <h3>{item.title}</h3>
-              <Markdown>{item.content}</Markdown>
-            </>
-          )
-        })}
-      </div>
       <div className={style.ax_card_list}>
         <Card iconSquared="./images/branding.svg" title="Branding" description="Logos, graphics and guidelines" />
         <Card iconSquared="./images/technology.svg" title="Technology" description="Tech, tools and more" />
@@ -37,9 +25,9 @@ const Dashboard = props => {
   )
 }
 
-const API_URL = `${process.env.API_URL}`;
+export const getServerSideProps = async ctx => {
 
-export const getServerSideProps = async (ctx) => {
+  const API_URL = process.env.API_URL;
 
   if (ctx.req.headers.cookie) {
     const token = getJwt(ctx.req.headers.cookie);
@@ -73,5 +61,6 @@ export const getServerSideProps = async (ctx) => {
   }
 
 }
+
 
 export default Dashboard;

@@ -40,10 +40,21 @@
     background: $light-gray;
     border-radius: .8rem;
     width: calc(100% - 6.4rem);
-    padding-right: 3.2rem;
+    background: $bright-color;
+    padding: 3.2rem;
+    margin-right: 1.6rem;
   }
 
   .right_column{
     width: 60rem;
+
+    .actions {
+      font-family: $display-font;
+      font-weight: 800;
+      display: flex;
+      > input {
+        margin-right: .8rem;
+      }
+    }
   }
 }

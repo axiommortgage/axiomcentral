@@ -8,7 +8,7 @@ import style from '../styles/AddBroker.module.scss'
 const AllBrokers = props => {
 
   const users = props.users;
-  console.log(users);
+  console.log(users)
 
   return (
     <motion.div
@@ -24,7 +24,7 @@ const AllBrokers = props => {
               <Card
                 key={index}
                 title={`${user.firstname} ${user.lastname} `}
-                photo={user.photo.url !== undefined ? user.photo.url : './images/axiom-a-logo.svg'}
+                photo={typeof (user.photo) !== 'undefined' ? user.photo.url : './images/axiom-a-logo.svg'}
               />
             )
           })}
