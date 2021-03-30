@@ -1,6 +1,7 @@
 import { parseCookies } from 'nookies';
 import Layout from '../components/Layout';
-import getJwt from '../helpers/formatCookie';
+import nookies from 'nookies';
+import { serializeArray } from '../helpers/serializeData';
 import style from '../styles/Dashboard.module.scss';
 import alerts from '../styles/ToastsAlerts.module.scss';
 import Card from '../components/Card';
@@ -9,6 +10,7 @@ import axios from 'axios';
 
 const Dashboard = props => {
   const { techs } = props;
+  console.log(techs);
 
   return (
     <Layout>
@@ -28,16 +30,21 @@ const API_URL = `${process.env.API_URL}`;
 
 export const getServerSideProps = async (ctx) => {
 
+
   if (ctx.req.headers.cookie) {
-    const token = getJwt(ctx.req.headers.cookie);
+    const tokens = nookies.get(ctx);
+    const jwt = tokens.jwt;
     const config = {
       headers: {
-        Authorization: 'Bearer ' + token
+        Authorization: 'Bearer ' + jwt
       }
     }
     const data = await axios.get(`${API_URL}/technologies`, config).then(res => {
-      var techs = res.data;
-      return techs;
+      const { data } = res;
+      const serializedData = serializeArray(data);
+      console.log('SSS', serializedData);
+      return serializedData;
+
     }).catch(err => {
       console.log(err)
     });

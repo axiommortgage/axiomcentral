@@ -52,8 +52,10 @@
       font-family: $display-font;
       font-weight: 800;
       display: flex;
-      > input {
+      > div {
         margin-right: .8rem;
+        display: flex;
+        align-items: center;
       }
     }
   }

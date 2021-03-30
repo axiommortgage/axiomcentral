@@ -10,7 +10,7 @@ const Signature = props => {
   const [processing, setProcessing] = useState(false);
   const [context] = useContext(SignatureContext);
 
-  const photoName = typeof(context.logoHeader) !== 'undefined' ? `${context.logoHeader.hash}${context.logoHeader.ext}` : '';
+  const photoName = typeof (context.logoHeader) !== 'undefined' ? `${context.logoHeader.hash}${context.logoHeader.ext}` : '';
   const logoUrl = `https://res.cloudinary.com/axiom-mortgage/image/upload/w_130,q_100/${photoName}`;
 
   const networks = () => {
@@ -21,7 +21,7 @@ const Signature = props => {
       socials.filter(item => {
 
         if (item === social) {
-          if(item.length > 0){
+          if (item.length > 0) {
             socialNets = { ...socialNets, [social]: context[social] }
           }
         }
@@ -31,6 +31,13 @@ const Signature = props => {
   }
 
   let socialNetworks = networks();
+
+  const formatPhone = () => {
+    const phone = context.phone;
+    return `${phone.slice(0, 3)}.${phone.slice(3, 6)}.${phone.slice(6, 10)}`;
+  }
+
+  const formatedPhone = formatPhone();
 
 
   //Copying HTML Email Signature
@@ -43,7 +50,7 @@ const Signature = props => {
     window.getSelection().removeAllRanges();
     window.getSelection().addRange(range);
     document.execCommand('copy');
-    setTimeout(()=>{
+    setTimeout(() => {
       setProcessing(false);
     }, 3000)
   }
@@ -57,57 +64,59 @@ const Signature = props => {
               <table>
                 <tbody>
                   <tr>
-                    <td style={{ borderRight: '1px solid #84bd00', verticalAlign: 'top', minWidth: '200px' }}>
-                      <h1 style={{ fontFamily: 'Arial, sans-serif !important', fontSize: '21px', lineHeight: '24px', color: '#000000', margin: '18px 0 4px 0' }}>{context.name}{context.aftername.length > 0 ?  ', ' : ''}<span style={{ fontSize: '12px' }}>{context.aftername.length > 0 ? context.aftername : ''}</span></h1>
+                    <td style={{ borderRight: '1px solid #84bd00', verticalAlign: 'top', minWidth: '200px', paddingRight: '16px' }}>
+                      <h1 style={{ fontFamily: 'Arial, sans-serif !important', fontSize: '21px', lineHeight: '24px', color: '#000000', margin: '0' }}>{context.name}{context.aftername.length > 0 ? ', ' : ''}<span style={{ fontSize: '12px' }}>{context.aftername.length > 0 ? context.aftername : ''}</span></h1>
                       <h4 style={{ fontFamily: 'Arial, sans-serif !important', fontSize: '14px', lineHeight: '18px', color: '#84bd00', margin: '0 0 16px 0' }}>{context.position}<span></span></h4>
-                      { props.logo && context.logoHeader && context.logoHeader.url ? 
-                      <p style={{width: '200px'}}>
-                        <img src={logoUrl} style={{ verticalAlign: 'middle', marginBottom: '5px', width: '130px' }} />                      
-                      </p>
-                      : ''}
+                      {props.logo && context.logoHeader && context.logoHeader.url ?
+                        <p style={{ width: '200px' }}>
+                          <img src={logoUrl} style={{ verticalAlign: 'middle', marginBottom: '5px', width: '130px' }} />
+                        </p>
+                        : ''}
                       <a href={context.applicationLink} style={{ padding: '4px 8px', borderRadius: '2px', margin: '0 0 24px 0', background: '#000', cursor: 'pointer', color: '#ffffff', textDecoration: 'none', fontSize: '14px' }}>Apply Now</a>
                     </td>
 
-                    <td style={{ verticalAlign: 'top', paddingTop: '8px' }}>                          
+                    <td style={{ verticalAlign: 'top', paddingTop: '0' }}>
                       {context.phone.length > 0 ?
-                      <a href={`tel:${context.phone === null ? '#' : context.phone}`}
-                        style={context.phone === null ? { display: 'none' } : { color: '#000000', fontSize: '15px', paddingLeft: '4px', lineHeight: '24px', display: 'block', textDecoration: 'none', margin: '8px 0 4px 16px' }}>
-                        <img src="http://brand.axiommortgage.ca/assets/email-signatures/images/2021/ico-phone-green.png"
-                          style={{ verticalAlign: 'middle' }} />
-                        {context.phone === null ? '-----' : context.phone}</a>
-                      : '' }
+                        <a href={`tel:${context.phone === null ? '#' : context.phone}`}
+                          style={context.phone === null ? { display: 'none' } : { color: '#000000', fontSize: '15px', paddingLeft: '4px', lineHeight: '24px', height: '24px', display: 'block', textDecoration: 'none', margin: '0 0 4px 16px' }}>
+                          <img src="http://brand.axiommortgage.ca/assets/email-signatures/images/2021/ico-phone-green.png"
+                            style={{ verticalAlign: 'middle' }} />
+                          {context.phone === null ? '-----' : formatedPhone}</a>
+                        : ''}
 
                       {context.email.length > 0 ?
-                      <a href={`mailto:${context.email === null ? '#' : context.email}`}
-                        style={context.email === null ? { display: 'none' } : { color: '#000000', fontSize: '15px', paddingLeft: '4px', lineHeight: '24px', display: 'block', textDecoration: 'none', margin: '0 0 4px 16px' }}>
-                        <img src="http://brand.axiommortgage.ca/assets/email-signatures/images/2021/ico-email-green.png"
-                          style={{ verticalAlign: 'middle', marginRight: '2px'  }} />
-                        {context.email === null ? '-----' : context.email}</a>
-                      : '' }
+                        <a href={`mailto:${context.email === null ? '#' : context.email}`}
+                          style={context.email === null ? { display: 'none' } : { color: '#000000', fontSize: '15px', paddingLeft: '4px', lineHeight: '24px', height: '24px', display: 'block', textDecoration: 'none', margin: '0 0 4px 16px' }}>
+                          <img src="http://brand.axiommortgage.ca/assets/email-signatures/images/2021/ico-email-green.png"
+                            style={{ verticalAlign: 'middle', marginRight: '2px' }} />
+                          {context.email === null ? '-----' : context.email}</a>
+                        : ''}
 
                       {context.website.length > 0 && context.website !== '#' ?
-                      <a href={context.website === null ? '#' : context.website} target="_blank"
-                        style={context.website === null ? { display: 'none' } : { color: '#000000', fontSize: '15px', paddingLeft: '4px', lineHeight: '24px', display: 'block', textDecoration: 'none', margin: '0 0 16px 16px' }}>
-                        <img src="http://brand.axiommortgage.ca/assets/email-signatures/images/2021/ico-website-green.png"
-                          style={{ verticalAlign: 'middle' }} />
-                        {context.website === null ? '-----' : context.website}</a>
-                      : '' }                    
+                        <a href={context.website === null ? '#' : context.website} target="_blank"
+                          style={context.website === null ? { display: 'none' } : { color: '#000000', fontSize: '15px', paddingLeft: '4px', lineHeight: '24px', height: '24px', display: 'block', textDecoration: 'none', margin: '0 0 4px 16px' }}>
+                          <img src="http://brand.axiommortgage.ca/assets/email-signatures/images/2021/ico-website-green.png"
+                            style={{ verticalAlign: 'middle' }} />
+                          {context.website === null ? '-----' : context.website}</a>
+                        : ''}
+
+                      {context.license ? <p style={{ fontSize: '12px', paddingLeft: '8px', lineHeight: '24px', display: 'block', textDecoration: 'none', margin: '0 0 0 16px' }}>License {context.license}</p> : ''}
                     </td>
                   </tr>
                 </tbody>
               </table>
-            </td>            
+            </td>
           </tr>
           <tr>
-            <td colSpan="2" style={{ paddingTop: '15px' }}></td>
+            <td colSpan="2" style={{ paddingTop: '15px', height: '22px', paddingBottom: '0' }}></td>
           </tr>
           <tr>
-            <td style={{ borderTop: '1px solid #84bd00' }}>
+            <td style={{ borderTop: '1px solid #84bd00', marginBottom: '0', paddingBottom: '0', display: 'table', paddingTop: '8px' }}>
               <img src="http://brand.axiommortgage.ca/assets/email-signatures/images/2021/axiom-mortgage-logo-horizontal.png"
                 alt={context.brokerage} />
             </td>
             <td width="320" style={{ verticalAlign: 'top', borderTop: '1px solid #84bd00' }}>
-              <table width="320" height="52" border="0" cellPadding="0" cellSpacing="0"
+              <table width="320" height="32" border="0" cellPadding="0" cellSpacing="0"
                 style={{ textAlign: 'right', margin: '0 0 0 10px' }}>
                 <tbody>
                   <tr>
@@ -122,7 +131,7 @@ const Signature = props => {
       </table>
       <button className={style.ax_btn_copy} onClick={e => copyHtml(e)}>Copy Signature</button>
 
-      <Toast showToast={processing} toastType="success" message="Your signature was copied to clipboard. Paste it on your signature area."/>
+      <Toast showToast={processing} toastType="success" message="Your signature was copied to clipboard. Paste it on your signature area." />
     </>
   )
 }

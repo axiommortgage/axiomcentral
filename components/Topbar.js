@@ -1,13 +1,13 @@
 import Router from 'next/router'
 import NProgress from 'nprogress';
-import {useState, useContext, useEffect} from 'react';
+import { useState, useContext, useEffect } from 'react';
 import AuthContext from '../context/authContext';
 import NotificationsContext from '../context/notificationsContext';
 import nookies from 'nookies';
 import axios from 'axios';
 import Avatar from './Avatar';
 import Notifications from './Notifications';
-import {UilBell } from '@iconscout/react-unicons';
+import { UilBell } from '@iconscout/react-unicons';
 import styles from '../styles/Topbar.module.scss';
 
 export const customLoader = () => {
@@ -38,16 +38,16 @@ Router.events.on('routeChangeError', () => NProgress.done());
 const API_URL = `${process.env.API_URL}`;
 
 const Topbar = props => {
-  const {userAuth, setUserAuth} = useContext(AuthContext);
+  const { userAuth, setUserAuth } = useContext(AuthContext);
   const obj = JSON.parse(JSON.stringify(nookies.get('jwt')));
   const token = Object.keys(obj).map(function (key) { return obj[key]; });
-  const config = { headers: { Authorization: 'Bearer ' + token[0]}}
-  const [notifications, setNotifications] = useState({notfs: null});
+  const config = { headers: { Authorization: 'Bearer ' + token[0] } }
+  const [notifications, setNotifications] = useState({ notfs: null });
 
   const fetchUser = async () => {
     const data = await axios.get(`${API_URL}/users/me`, config).then(res => {
       var me = res.data;
-      setUserAuth({...userAuth, userInfo: me});
+      setUserAuth({ ...userAuth, userInfo: me });
     }).catch(err => {
       console.log(err)
     });
@@ -57,22 +57,22 @@ const Topbar = props => {
   const fetchNotifications = async () => {
     const data = await axios.get(`${API_URL}/notifications`, config).then(res => {
       let notfs = JSON.parse(JSON.stringify(res.data));
-      setNotifications({...notifications, notfs});
+      setNotifications({ ...notifications, notfs });
     }).catch(err => {
       console.log(err)
     });
     return data;
   }
 
-  useEffect(()=>{
-    fetchUser();  
-    fetchNotifications();    
+  useEffect(() => {
+    fetchUser();
+    fetchNotifications();
   }, []);
 
   const [showNotfs, setShowNotfs] = useState(false);
 
   const ntfCounter = () => {
-    if(notifications.notfs){
+    if (notifications.notfs) {
       let items = notifications.notfs;
       return items.length;
     }
@@ -83,25 +83,25 @@ const Topbar = props => {
   let ntfNumber = ntfCounter();
 
   return (
-    <NotificationsContext.Provider value={{notifications, setNotifications}}>
+    <NotificationsContext.Provider value={{ notifications, setNotifications }}>
       <header className={styles.ax_topbar}>
         <div className={styles.ax_logo}>
           <img src="./images/logo.svg" alt="axiom central logo" />
         </div>
         <div className={styles.ax_topbar_actions} >
           <div>
-            <button className={styles.ax_noftfs_button} onClick={() => setShowNotfs(!showNotfs) }>
-              <span>{ntfNumber}</span>
+            <button className={styles.ax_noftfs_button} onClick={() => setShowNotfs(!showNotfs)}>
+              {notifications.notfs > 0 ? <span>{ntfNumber}</span> : ''}
               <UilBell size={32} />
             </button>
-            <Notifications isopen={showNotfs}/>
+            <Notifications isopen={showNotfs} />
           </div>
-          {userAuth.userInfo ? 
+          {userAuth.userInfo ?
             <>
               <h3>{userAuth.userInfo.firstname} {userAuth.userInfo.lastname}</h3>
-              <Avatar photoUrl={userAuth.userInfo.photo.url} size={40} /> 
+              <Avatar photoUrl={userAuth.userInfo.photo.url} size={40} />
             </>
-          : '' }
+            : ''}
         </div>
       </header>
     </NotificationsContext.Provider>

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import AuthContext from '../context/authContext';
-import getJwt from '../helpers/formatCookie';
+import nookies from 'nookies';
 import Layout from '../components/Layout';
 import style from '../styles/Dashboard.module.scss';
 import alerts from '../styles/ToastsAlerts.module.scss';
@@ -30,10 +30,11 @@ export const getServerSideProps = async ctx => {
   const API_URL = process.env.API_URL;
 
   if (ctx.req.headers.cookie) {
-    const token = getJwt(ctx.req.headers.cookie);
+    const tokens = nookies.get(ctx);
+    const jwt = tokens.jwt;
     const config = {
       headers: {
-        Authorization: 'Bearer ' + token
+        Authorization: 'Bearer ' + jwt
       }
     }
 

@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react'
 import SignatureContext from '../context/signatureContext';
-import AuthContext from '../context/authContext';
-import Head from 'next/head';
+import { serializeJson } from '../helpers/serializeData';
 import style from '../styles/SignaturePage.module.scss';
 import alerts from '../styles/ToastsAlerts.module.scss';
 import Form from '../components/Signature/Form';
@@ -10,8 +9,7 @@ import SignatureWithPhoto from '../components/Signature/SignatureWithPhoto';
 import Layout from '../components/Layout';
 import { motion } from 'framer-motion';
 import axios from 'axios';
-import getJwt from '../helpers/formatCookie';
-
+import nookies from 'nookies';
 
 const EmailSignature = props => {
   const ctxVal = {
@@ -90,31 +88,17 @@ export const getServerSideProps = async ctx => {
 
   const API_URL = process.env.API_URL;
   if (ctx.req.headers.cookie) {
-    const token = getJwt(ctx.req.headers.cookie);
-
+    const tokens = nookies.get(ctx);
+    const jwt = tokens.jwt;
     const config = {
       headers: {
-        Authorization: 'Bearer ' + token
+        Authorization: 'Bearer ' + jwt
       }
     }
 
     const data = await axios.get(`${API_URL}/users/me`, config).then(res => {
       const { data } = res;
-      const user = data;
-
-      const replaceNulls = () => {
-        let serialized = {}
-        for (let item in user) {
-          if (user[item] === null) {
-            serialized = { ...serialized, [item]: '' }
-          } else {
-            serialized = { ...serialized, [item]: user[item] }
-          }
-        }
-        return serialized;
-      }
-
-      const serializedData = replaceNulls();
+      const serializedData = serializeJson(data);
       return serializedData;
 
     }).catch(err => {
