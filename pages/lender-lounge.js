@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Layout from '../components/Layout';
 import Card from '../components/Card';
 import { motion } from 'framer-motion';
@@ -8,10 +9,10 @@ import ScrollContainer from 'react-indiana-drag-scroll';
 import nookies from 'nookies';
 
 const AllLenders = props => {
+  const [view, setView] = useState('list');
 
   const lenders = props.lenders;
   const headers = ['Lender', 'Submission Agent/Agent Name', 'Set Up Requirements / Allowing for new broker sign ups', 'BDM', 'BDM Email', 'BDM Phone', 'Underwriter', 'Underwriter Email', 'Underwriter Phone', 'Portal Website', 'User ID', 'Password', 'Email Notifications', 'Documents', 'Notes'];
-  console.log('LENDERS: ', lenders)
 
   const generateRows = () => {
     const filterLenders = lenders.map((row, index) => {
@@ -41,7 +42,6 @@ const AllLenders = props => {
       return filteredObj;
     });
 
-    console.log(filterLenders)
 
     return (
       <>
@@ -83,24 +83,35 @@ const AllLenders = props => {
       <Layout>
         <h1 className={style.ax_page_title}>Lender Lounge</h1>
         <h3 className={alerts.ax_tip}>Click and Drag on the table to scroll horizontally.</h3>
+        <div className={style.ax_toggle_view}>
+          <button className={`${style.ax_list_view} ${view === 'list' ? style.active : ''}`} onClick={e => setView('list')}>List</button>
+          <button className={`${style.ax_card_view} ${view === 'cards' ? style.active : ''}`} onClick={e => setView('cards')}>Cards</button>
+        </div>
+        {view === 'list' ?
+          <ScrollContainer horizontal={true} vertical={false} className={style.lendersTable}>
 
-        <ScrollContainer horizontal={true} vertical={false} className={style.lendersTable}>
-
-          <table className={style.lendersTable} cellPadding="0" cellSpacing="0">
-            <thead>
-              <tr>
-                {headers.map((item, index) => {
-                  return (
-                    <th key={index}>{item}</th>
-                  )
-                })}
-              </tr>
-            </thead>
-            <tbody>
-              {theRows}
-            </tbody>
-          </table>
-        </ScrollContainer>
+            <table className={style.lendersTable} cellPadding="0" cellSpacing="0">
+              <thead>
+                <tr>
+                  {headers.map((item, index) => {
+                    return (
+                      <th key={index}>{item}</th>
+                    )
+                  })}
+                </tr>
+              </thead>
+              <tbody>
+                {theRows}
+              </tbody>
+            </table>
+          </ScrollContainer>
+          :
+          <div className={style.ax_card_view}>
+            {lenders.map((item, index) => {
+              return <Card icon={item.logo.url} title={item.name} hasButton linkUrl={`lenders/${item.slug}`} buttonLabel="See Info" />
+            })}
+          </div>
+        }
       </Layout >
     </motion.div>
   )
