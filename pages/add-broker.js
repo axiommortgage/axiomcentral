@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { parseCookies } from 'nookies';
+import nookies from 'nookies';
 import Layout from '../components/Layout';
 import axios from 'axios';
 import { motion } from 'framer-motion';
@@ -402,7 +402,8 @@ const AddBroker = props => {
 
 export const getServerSideProps = async (ctx) => {
 
-  let jwt = parseCookies(ctx).jwt;
+  const tokens = nookies.get(ctx);
+  const jwt = tokens.jwt;
 
   if (!jwt) {
     if (ctx.res) {

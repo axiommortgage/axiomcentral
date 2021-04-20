@@ -109,9 +109,14 @@ const Menu = props => {
           <Link href="/newsletter"> Newsletter</Link>
         </div> */}
 
-        <div className={styles.ax_menu_item}>
+        {/* <div className={styles.ax_menu_item}>
           <UilUserPlus size={20} />
           <Link href="/add-broker"> Add Broker</Link>
+        </div> */}
+
+        <div className={styles.ax_menu_item}>
+          <UilUser size={20} />
+          <Link href="/profile"> Profile</Link>
         </div>
 
         <div className={styles.ax_menu_item}>

@@ -3,18 +3,20 @@ import { serializeJson } from '../../helpers/serializeData';
 import Layout from '../../components/Layout';
 import Avatar from '../../components/Avatar';
 import style from '../../styles/Lenders.module.scss';
+import nookies from 'nookies';
 
 const Lender = props => {
+
   const lender = props.data[0];
 
   return (
     <Layout>
       <section className={style.ax_post_title}>
-        <Avatar photoUrl={lender.logo.url} size={100} />
         <h1 className={style.ax_page_title}>{lender.name}</h1>
       </section>
       <section className={style.ax_post_info}>
         <div className={style.ax_post_details}>
+          <img src={lender.logo.url} className={style.logo} />
 
           <div className={style.col}>
             <p><strong>Name: </strong>{lender.name}</p>
@@ -39,7 +41,6 @@ const Lender = props => {
             <p><strong>Documents: </strong>{lender.documents}</p>
             <p><strong>Notes: </strong>{lender.notes}</p>
           </div>
-
         </div>
       </section>
     </Layout>
@@ -48,19 +49,15 @@ const Lender = props => {
 
 const apiURL = process.env.API_URL;
 
+export const getServerSideProps = async (ctx) => {
+  const tokens = nookies.get(ctx);
+  const token = tokens.jwt;
 
-export async function getStaticPaths() {
-
-  const res = await axios.get(`${apiURL}/lenders`);
-  const lenders = res.data;
-
-  const paths = lenders.map(lender => `/lenders/${lender.slug}`)
-  return { paths, fallback: false }
-}
-
-export const getStaticProps = async ({ params }) => {
-
-  const data = await axios.get(`${apiURL}/lenders?slug_eq=${params.slug}`).then(res => {
+  const data = await axios.get(`${apiURL}/lenders?slug_eq=${ctx.params.slug}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }).then(res => {
     const lenderData = serializeJson(res.data);
     return lenderData;
 

@@ -1,4 +1,5 @@
 $highlight-color: #84bd00;
+$highlight-dark: #628c01;
 $base-color: #000;
 $base-mid-color: #414141;
 $mid-gray: #d7dfe9;
@@ -64,7 +65,7 @@ $cubic-transition: cubic-bezier(0,.83,.42,1.01);
     flex-direction: column;    
 
     label{
-      color: $base-color;
+      color: $highlight-dark;
       font-family: $display-font;
       font-size: 1.4rem;
       font-weight: 700;
@@ -92,8 +93,13 @@ $cubic-transition: cubic-bezier(0,.83,.42,1.01);
       margin-bottom: 1.6rem;
     }
 
-    input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="tel"] {
+    input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="tel"], input[type="date"], input[type="time"], input[type="number"], input[type="url"] {
       height: 4rem;
+
+      &::placeholder{
+        font-weight: 400;
+        color: $mid-gray;
+      }
     }
 
     small{

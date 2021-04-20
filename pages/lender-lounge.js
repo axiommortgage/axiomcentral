@@ -7,6 +7,8 @@ import style from '../styles/Lenders.module.scss';
 import alerts from '../styles/ToastsAlerts.module.scss';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import nookies from 'nookies';
+import { UilListUl, UilApps } from '@iconscout/react-unicons';
+
 
 const AllLenders = props => {
   const [view, setView] = useState('list');
@@ -48,7 +50,7 @@ const AllLenders = props => {
         {filterLenders.map((item, index) => {
 
           return (
-            <tr>
+            <tr key={index}>
               <td>{item.name}</td>
               <td>{item.submissionAgent}</td>
               <td>{item.setupRequirements}</td>
@@ -84,8 +86,8 @@ const AllLenders = props => {
         <h1 className={style.ax_page_title}>Lender Lounge</h1>
         <h3 className={alerts.ax_tip}>Click and Drag on the table to scroll horizontally.</h3>
         <div className={style.ax_toggle_view}>
-          <button className={`${style.ax_list_view} ${view === 'list' ? style.active : ''}`} onClick={e => setView('list')}>List</button>
-          <button className={`${style.ax_card_view} ${view === 'cards' ? style.active : ''}`} onClick={e => setView('cards')}>Cards</button>
+          <button className={`${style.ax_list_view} ${view === 'list' ? style.active : ''}`} onClick={e => setView('list')}><UilListUl /> List</button>
+          <button className={`${style.ax_card_view} ${view === 'cards' ? style.active : ''}`} onClick={e => setView('cards')}><UilApps /> Cards</button>
         </div>
         {view === 'list' ?
           <ScrollContainer horizontal={true} vertical={false} className={style.lendersTable}>

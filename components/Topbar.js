@@ -4,6 +4,7 @@ import { useState, useContext, useEffect } from 'react';
 import AuthContext from '../context/authContext';
 import NotificationsContext from '../context/notificationsContext';
 import nookies from 'nookies';
+import Cookies from 'js-cookie';
 import axios from 'axios';
 import Avatar from './Avatar';
 import Notifications from './Notifications';
@@ -39,9 +40,13 @@ const API_URL = `${process.env.API_URL}`;
 
 const Topbar = props => {
   const { userAuth, setUserAuth } = useContext(AuthContext);
-  const obj = JSON.parse(JSON.stringify(nookies.get('jwt')));
-  const token = Object.keys(obj).map(function (key) { return obj[key]; });
-  const config = { headers: { Authorization: 'Bearer ' + token[0] } }
+  // const obj = JSON.parse(JSON.stringify(nookies.get('jwt')));
+  // const token = Object.keys(obj).map(function (key) { return obj[key]; });
+  // const config = { headers: { Authorization: 'Bearer ' + token[0] } }
+
+  const token = Cookies.get('jwt');
+  const config = { headers: { Authorization: 'Bearer ' + token } }
+
   const [notifications, setNotifications] = useState({ notfs: null });
 
   const fetchUser = async () => {
@@ -86,7 +91,7 @@ const Topbar = props => {
     <NotificationsContext.Provider value={{ notifications, setNotifications }}>
       <header className={styles.ax_topbar}>
         <div className={styles.ax_logo}>
-          <img src="./images/logo.svg" alt="axiom central logo" />
+          <img src="/images/logo.svg" alt="axiom central logo" />
         </div>
         <div className={styles.ax_topbar_actions} >
           <div>

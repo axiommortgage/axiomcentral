@@ -1,14 +1,14 @@
 import '../styles/globals.css';
-import {useState, useContext} from 'react';
+import { useState, useContext } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import AuthContext from '../context/authContext';
-import {authStatus} from '../auth/auth';
+import { authStatus } from '../auth/auth';
 
 const MyApp = ({ Component, pageProps }) => {
-  const [userAuth, setUserAuth] = useState({isAuth: authStatus()});
+  const [userAuth, setUserAuth] = useState({ isAuth: authStatus() });
 
   return (
-    <AuthContext.Provider value={{userAuth, setUserAuth}}>
+    <AuthContext.Provider value={{ userAuth, setUserAuth }}>
       <AnimatePresence exitBeforeEnter>
         <Component {...pageProps} />
       </AnimatePresence>
@@ -17,3 +17,4 @@ const MyApp = ({ Component, pageProps }) => {
 }
 
 export default MyApp
+
