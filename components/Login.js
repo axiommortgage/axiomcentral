@@ -67,7 +67,7 @@ const Login = props => {
 
           <button type="submit" onClick={e => handleLogin(e)}>{processing ? <img src="/images/spinner-white.svg" /> : ''}Login</button>
         </form>
-        <Link href="/reset-password">Forgot your password? Click here.</Link>
+        <Link href="/forgot-password">Forgot your password? Click here.</Link>
       </div>
     </section>
   )
