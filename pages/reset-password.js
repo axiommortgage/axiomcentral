@@ -34,17 +34,21 @@ const NewPassword = () => {
   const resetPassword = async e => {
     e.preventDefault();
 
-    passValidation();
+    const validation = passValidation();
 
-    await axios.post(`${ApiUrl}/auth/reset-password`, {
-      code: code, // code contained in the reset link of step 3.
-      password: newPassword,
-      passwordConfirmation: confirmNewPassword,
-    }).then(res => {
-      console.log(res);
-    }).catch(err => {
-      console.log(err);
-    });
+    if (validation) {
+      await axios.post(`${ApiUrl}/auth/reset-password`, {
+        code: code, // code contained in the reset link of step 3.
+        password: newPassword,
+        passwordConfirmation: confirmNewPassword,
+      }).then(res => {
+        console.log(res);
+        setMessage('success')
+      }).catch(err => {
+        console.log(err);
+        setMessage('error')
+      });
+    }
   }
 
   const showMessage = () => {
@@ -68,6 +72,8 @@ const NewPassword = () => {
       default: return '';
     }
   }
+
+  const response = showMessage();
 
   const seePassword = (e, field) => {
     e.preventDefault();
@@ -108,6 +114,7 @@ const NewPassword = () => {
           <button className={style.ax_btn_submit} name="forgot" type="submit" onClick={e => resetPassword(e)} >Send</button>
         </div>
       </form>
+      {response}
     </section>
   )
 }
