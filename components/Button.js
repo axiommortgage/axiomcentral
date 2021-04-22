@@ -1,4 +1,5 @@
 import style from '../styles/Button.module.scss';
+import Link from 'next/link';
 
 const Button = (props) => {
 
@@ -30,7 +31,9 @@ const Button = (props) => {
 
   if (props.isLink) {
     return (
-      <a href={props.linkPath} className={`${style.ax_btn} ${sizeClass()} ${colorClass()} ${centeredClass()} ${wideClass()}}`} target={blank()}>{props.label}</a>
+      <Link>
+        <a href={props.linkPath} className={`${style.ax_btn} ${sizeClass()} ${colorClass()} ${centeredClass()} ${wideClass()}}`} target={blank()}>{props.label}</a>
+      </Link>
     )
   }
   return <button className={`${style.ax_btn} ${sizeClass()} ${colorClass()} ${centeredClass()} ${wideClass()}}`}>{props.label}</button>

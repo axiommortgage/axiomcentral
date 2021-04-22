@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import axios from 'axios';
 import style from '../styles/Password.module.scss';
+import alerts from '../styles/ToastsAlerts.module.scss';
 
 const NewPassword = () => {
 
   const [userEmail, setUserEmail] = useState('');
+  const [message, setMessage] = useState('');
 
   const ApiUrl = process.env.API_URL;
 
@@ -14,13 +16,38 @@ const NewPassword = () => {
     await axios.post(`${ApiUrl}/auth/forgot-password`, {
       email: userEmail
     }).then(res => {
+      console.log(res);
       if (res.data.ok) {
-        setStep('reset');
+        setMessage('success');
       }
     }).catch(err => {
-      console.log(err.response);
+      setMessage('error');
+      console.log(err);
     });
   }
+
+  const showMessage = () => {
+    switch (message) {
+      case 'success': {
+        return (
+          <div className={alerts.ax_tip}>
+            <p>Please check your email for more instructions on how to reset your password.</p>
+          </div>
+        )
+      }
+      case 'error': {
+        return (
+          <div className={alerts.ax_tip_error}>
+            <p>The informed email doesn't exist in our database. Please inform your registration email.</p>
+          </div>
+        )
+      }
+
+      default: return '';
+    }
+  }
+
+  const response = showMessage();
 
   return (
     <section className={`${style.ax_section} ${style.ax_form_container}`}>
@@ -36,6 +63,7 @@ const NewPassword = () => {
           <button className={style.ax_btn_submit} name="forgot" type="submit" onClick={e => forgotPassword(e)} >Send</button>
         </div>
       </form>
+      {response}
     </section>
   )
 }

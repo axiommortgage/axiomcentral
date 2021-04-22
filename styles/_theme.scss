@@ -85,7 +85,8 @@ $cubic-transition: cubic-bezier(0,.83,.42,1.01);
   }
   .ax_field{
     display: flex;
-    flex-direction: column;    
+    flex-direction: column;  
+    position: relative;  
 
     label{
       color: $highlight-dark;
@@ -108,7 +109,7 @@ $cubic-transition: cubic-bezier(0,.83,.42,1.01);
       border-radius: .4rem;
       border: .1rem solid $mid-gray;
       background: $light-gray;
-      padding: 0 1.6rem;
+      padding: 0 4rem 0 1.6rem;
       color: $base-color;
       font-family: $display-font;
       font-size: 1.4rem;
@@ -122,6 +123,21 @@ $cubic-transition: cubic-bezier(0,.83,.42,1.01);
       &::placeholder{
         font-weight: 400;
         color: $mid-gray;
+      }
+    }
+
+    button.see{
+      position: absolute;
+      top: 2.2rem;
+      right: 0;
+      width: 4rem;
+      height: 4rem;
+      border: none;
+      background: transparent;
+
+
+      svg{
+        color: $base-mid-color;
       }
     }
 

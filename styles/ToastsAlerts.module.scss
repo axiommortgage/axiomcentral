@@ -86,3 +86,16 @@
     color: $highlight-color;
   }
 }
+
+.ax_tip_error{
+  font-family: $display-font;
+  border-left: .4rem solid red;
+  background: $light-gray;
+  color: rgb(84, 0, 0);
+  border-radius: 0 .8rem .8rem 0;
+  padding: .8rem; 
+
+  span{
+    color: $highlight-color;
+  }
+}
