@@ -11,7 +11,7 @@ const Login = props => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [processing, setProcessing] = useState(false);
-  const {userAuth, setUserAuth} = useContext(AuthContext);
+  const { userAuth, setUserAuth } = useContext(AuthContext);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -30,7 +30,7 @@ const Login = props => {
       let jwt = res.data.jwt;
       let user = res.data.user;
 
-      setUserAuth({isAuth: true, userInfo: res.data.user});
+      setUserAuth({ isAuth: true, userInfo: res.data.user });
 
       setCookie(null, 'jwt', jwt, {
         maxAge: 30 * 24 * 60 * 60,
@@ -67,7 +67,7 @@ const Login = props => {
 
           <button type="submit" onClick={e => handleLogin(e)}>{processing ? <img src="/images/spinner-white.svg" /> : ''}Login</button>
         </form>
-        <Link href="/">Forgot your password? Click here.</Link>
+        <Link href="/reset-password">Forgot your password? Click here.</Link>
       </div>
     </section>
   )

@@ -14,7 +14,16 @@ $shadow-large: 8px 8px 24px rgba(45, 44, 48, 0.15);
 $cubic-transition: cubic-bezier(0,.83,.42,1.01);
 
 
+
 @media screen and (min-width: 0) and (max-width: 767px){
+
+  .ax_section {
+    p{
+      font-size: 1.6rem;
+      font-family: $body-font;
+    }
+  }
+
   .ax_container{
     width: 90%;
     display: block;
@@ -29,6 +38,13 @@ $cubic-transition: cubic-bezier(0,.83,.42,1.01);
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px){
+  .ax_section {
+    p{
+      font-size: 1.6rem;
+      font-family: $body-font;
+    }
+  }
+
   .ax_container{
     width: 74rem;
     display: block;
@@ -37,6 +53,13 @@ $cubic-transition: cubic-bezier(0,.83,.42,1.01);
 }
 
 @media screen and (min-width: 1200px){
+  .ax_section {
+    p{
+      font-size: 1.6rem;
+      font-family: $body-font;
+    }
+  }
+  
   .ax_container{
     width: 114rem;
     display: block;
