@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import Button from '../components/Button';
+import Link from 'next/link';
 import style from '../styles/Password.module.scss';
 import alerts from '../styles/ToastsAlerts.module.scss';
 import { UilEyeSlash, UilEye } from '@iconscout/react-unicons';
@@ -11,7 +11,6 @@ const NewPassword = () => {
 
   const router = useRouter();
   const code = router.query.code;
-  console.log(code)
 
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -22,14 +21,18 @@ const NewPassword = () => {
   const ApiUrl = process.env.API_URL;
 
   const passValidation = () => {
-    if (newPassword === confirmNewPassword) {
-      setMessage('success');
-      return true;
+    if (newPassword.length > 5 && confirmNewPassword.length > 5) {
+      if (newPassword === confirmNewPassword) {
+        setMessage('success');
+        return true;
+      } else {
+        setMessage('error');
+        return false;
+      }
     } else {
       setMessage('error');
-      return false;
     }
-  }
+  };
 
   const resetPassword = async e => {
     e.preventDefault();
@@ -51,30 +54,6 @@ const NewPassword = () => {
     }
   }
 
-  const showMessage = () => {
-    switch (message) {
-      case 'success': {
-        return (
-          <div className={alerts.ax_tip}>
-            <p>Your password has been reset successfuly.</p>
-            <Button isLink linkPath='/' label="Go to Login" size="medium" />
-          </div>
-        )
-      }
-      case 'error': {
-        return (
-          <div className={alerts.ax_tip_error}>
-            <p>Passwords doesn't match.</p>
-          </div>
-        )
-      }
-
-      default: return '';
-    }
-  }
-
-  const response = showMessage();
-
   const seePassword = (e, field) => {
     e.preventDefault();
 
@@ -86,12 +65,34 @@ const NewPassword = () => {
     }
   }
 
+  const showMessage = () => {
+    switch (message) {
+      case 'success': {
+        return (
+          <div className={alerts.ax_tip}>
+            <p>Your password has been reset successfuly. Go to <Link href="/"> <a>Login</a></Link></p>
+          </div>
+        )
+      }
+      case 'error': {
+        return (
+          <div className={alerts.ax_tip_error}>
+            <p>Passwords doesn't match or has less than 5 characters.</p>
+          </div>
+        )
+      }
+      default: return '';
+    }
+  }
+
+  const response = showMessage();
+
   return (
     <section className={`${style.ax_section} ${style.ax_form_container}`}>
       <img src="/images/logo.svg" alt="axiom central logo" />
       <h1 className={style.ax_page_title}>Reset Password</h1>
       <form className={style.ax_form}>
-        <p>Insert and confirm your new password.</p>
+        <p>Insert and confirm your new password. It must contain at least 6 characters.</p>
         <div className={style.ax_field}>
           <label htmlFor="password">New Password</label>
           {seeNew ?
