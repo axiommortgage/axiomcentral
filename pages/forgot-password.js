@@ -7,11 +7,13 @@ const NewPassword = () => {
 
   const [userEmail, setUserEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [spinner, setSpinner] = useState(false);
 
   const ApiUrl = process.env.API_URL;
 
   const forgotPassword = async e => {
     e.preventDefault();
+    setSpinner(true);
 
     await axios.post(`${ApiUrl}/auth/forgot-password`, {
       email: userEmail
@@ -19,10 +21,12 @@ const NewPassword = () => {
       console.log(res);
       if (res.data.ok) {
         setMessage('success');
+        setSpinner(false);
       }
     }).catch(err => {
       setMessage('error');
       console.log(err);
+      setSpinner(false);
     });
   }
 
@@ -60,7 +64,7 @@ const NewPassword = () => {
           <input type="email" name="email" placeholder="Email" onChange={e => setUserEmail(e.target.value)}></input>
         </div>
         <div className={style.ax_field}>
-          <button className={style.ax_btn_submit} name="forgot" type="submit" onClick={e => forgotPassword(e)} >Send</button>
+          <button className={style.ax_btn_submit} name="forgot" type="submit" onClick={e => forgotPassword(e)} >{spinner ? <img src="/images/spinner-white.svg" /> : ''}Send</button>
         </div>
       </form>
       {response}

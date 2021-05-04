@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import Link from 'next/link';
 import style from '../styles/Password.module.scss';
-import alerts from '../styles/ToastsAlerts.module.scss';
 import { UilEyeSlash, UilEye } from '@iconscout/react-unicons';
-
+import ResetPasswordStatus from '../components/ResetPasswordStatus';
 
 const NewPassword = () => {
 
@@ -14,42 +12,46 @@ const NewPassword = () => {
 
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('neutral');
   const [seeNew, setSeeNew] = useState(false);
   const [seeConfirm, setSeeConfirm] = useState(false);
+  const [spinner, setSpinner] = useState(false);
 
   const ApiUrl = process.env.API_URL;
 
   const passValidation = () => {
-    if (newPassword.length > 5 && confirmNewPassword.length > 5) {
+    if (newPassword.length > 0 && newPassword.length > 5 && confirmNewPassword.length > 0 && confirmNewPassword.length > 5) {
       if (newPassword === confirmNewPassword) {
-        setMessage('success');
         return true;
       } else {
         setMessage('error');
+        setSpinner(false);
         return false;
       }
     } else {
       setMessage('error');
+      setSpinner(false);
     }
   };
 
-  const resetPassword = async e => {
+  const resetPassword = e => {
     e.preventDefault();
-
+    setSpinner(true);
     const validation = passValidation();
 
     if (validation) {
-      await axios.post(`${ApiUrl}/auth/reset-password`, {
+      axios.post(`${ApiUrl}/auth/reset-password`, {
         code: code, // code contained in the reset link of step 3.
         password: newPassword,
         passwordConfirmation: confirmNewPassword,
       }).then(res => {
         console.log(res);
-        setMessage('success')
+        setMessage('success');
+        setSpinner(false);
       }).catch(err => {
         console.log(err);
-        setMessage('error')
+        setMessage('error');
+        setSpinner(false);
       });
     }
   }
@@ -64,28 +66,6 @@ const NewPassword = () => {
       setSeeConfirm(!seeConfirm)
     }
   }
-
-  const showMessage = () => {
-    switch (message) {
-      case 'success': {
-        return (
-          <div className={alerts.ax_tip}>
-            <p>Your password has been reset successfuly. Go to <Link href="/"> <a>Login</a></Link></p>
-          </div>
-        )
-      }
-      case 'error': {
-        return (
-          <div className={alerts.ax_tip_error}>
-            <p>Passwords doesn't match or has less than 5 characters.</p>
-          </div>
-        )
-      }
-      default: return '';
-    }
-  }
-
-  const response = showMessage();
 
   return (
     <section className={`${style.ax_section} ${style.ax_form_container}`}>
@@ -112,10 +92,10 @@ const NewPassword = () => {
           <button className={style.see} onClick={e => seePassword(e, 'confirm')}>{seeConfirm ? <UilEye /> : <UilEyeSlash />}</button>
         </div>
         <div className={style.ax_field}>
-          <button className={style.ax_btn_submit} name="forgot" type="submit" onClick={e => resetPassword(e)} >Send</button>
+          <button className={style.ax_btn_submit} name="forgot" type="submit" onClick={e => resetPassword(e)} >{spinner ? <img src="/images/spinner-white.svg" /> : ''}Send</button>
         </div>
+        <ResetPasswordStatus status={message} />
       </form>
-      {response}
     </section>
   )
 }
