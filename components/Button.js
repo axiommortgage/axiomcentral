@@ -31,8 +31,8 @@ const Button = (props) => {
 
   if (props.isLink) {
     return (
-      <Link>
-        <a href={props.linkPath} className={`${style.ax_btn} ${sizeClass()} ${colorClass()} ${centeredClass()} ${wideClass()}}`} target={blank()}>{props.label}</a>
+      <Link href={props.linkPath}>
+        <a className={`${style.ax_btn} ${sizeClass()} ${colorClass()} ${centeredClass()} ${wideClass()}}`} target={blank()}>{props.label}</a>
       </Link>
     )
   }
