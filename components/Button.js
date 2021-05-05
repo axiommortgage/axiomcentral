@@ -1,42 +1,52 @@
-import style from '../styles/Button.module.scss';
-import Link from 'next/link';
+import Link from 'next/link'
+import style from '../styles/Button.module.scss'
 
 const Button = (props) => {
+  const { sizing, isLink, linkPath, label, color, isCentered, isWide, blank } = props
 
-  const colorClass = () => {
-    return props.color === 'highlight' ? style.ax_btn_highlight : style.ax_btn_base;
-  }
+  const colorClass = () => (color === 'highlight' ? style.ax_btn_highlight : style.ax_btn_base)
 
-  const centeredClass = () => {
-    return props.isCentered ? style.ax_btn_centered : '';
-  }
+  const centeredClass = () => (isCentered ? style.ax_btn_centered : '')
 
-  const wideClass = () => {
-    return props.isWide ? style.ax_btn_wide : '';
-  }
+  const wideClass = () => (isWide ? style.ax_btn_wide : '')
 
-  const blank = () => {
-    return props.blank ? '_blank' : '_self';
-  }
+  const blankTarget = () => (blank ? '_blank' : '_self')
 
   const sizeClass = () => {
-    switch (props.sizing) {
-      case 'small': return style.ax_btn_small;
-      case 'medium': return style.ax_btn_medium;
-      case 'large': return style.ax_btn_large;
-      case 'xlarge': return style.ax_btn_xlarge;
-      default: return style.ax_btn_medium;
+    switch (sizing) {
+      case 'small':
+        return style.ax_btn_small
+      case 'medium':
+        return style.ax_btn_medium
+      case 'large':
+        return style.ax_btn_large
+      case 'xlarge':
+        return style.ax_btn_xlarge
+      default:
+        return style.ax_btn_medium
     }
   }
 
-  if (props.isLink) {
+  if (isLink) {
     return (
-      <Link href={props.linkPath}>
-        <a className={`${style.ax_btn} ${sizeClass()} ${colorClass()} ${centeredClass()} ${wideClass()}}`} target={blank()}>{props.label}</a>
+      <Link href={linkPath}>
+        <a
+          className={`${style.ax_btn} ${sizeClass()} ${colorClass()} ${centeredClass()} ${wideClass()}}`}
+          target={blankTarget()}
+        >
+          {label}
+        </a>
       </Link>
     )
   }
-  return <button className={`${style.ax_btn} ${sizeClass()} ${colorClass()} ${centeredClass()} ${wideClass()}}`}>{props.label}</button>
+  return (
+    <button
+      type="button"
+      className={`${style.ax_btn} ${sizeClass()} ${colorClass()} ${centeredClass()} ${wideClass()}}`}
+    >
+      {label}
+    </button>
+  )
 }
 
-export default Button;
+export default Button

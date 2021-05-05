@@ -1,16 +1,17 @@
-import styles from '../styles/Loaders.module.scss';
+import styles from '../styles/Loaders.module.scss'
 
-const Processing = props => {
-  if (props.processing === true) {
+const Processing = (props) => {
+  const { processing } = props
+
+  if (processing === true) {
     return (
       <div className={styles.ax_processing}>
-        <span></span>
+        <span />
         <p>{props.message}</p>
       </div>
     )
-  } else {
-    return <div className={styles.ax_processing_hidden}></div>
   }
+  return <div className={styles.ax_processing_hidden} />
 }
 
-export default Processing;
+export default Processing

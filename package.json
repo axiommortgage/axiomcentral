@@ -6,21 +6,29 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "linter": "./node_modules/.bin/eslint"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
     "@iconscout/react-unicons": "^1.1.6",
     "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",
+    "framer-motion": "^3.3.0",
     "js-cookie": "^2.2.1",
     "next": "10.0.5",
     "nookies": "^2.5.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-indiana-drag-scroll": "^1.8.1",
-    "sass": "^1.32.2"
+    "sass": "^1.32.2",
+    "react-filterable-table": "^0.3.434",
+    "markdown-it": "^12.0.4",
+    "nprogress": "^0.2.0"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.1.0",
+    "babel-preset-airbnb": "^5.0.0",
+    "babel-preset-react-native": "^4.0.1",
     "eslint": "^7.25.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
@@ -29,10 +37,9 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "framer-motion": "^3.3.0",
-    "markdown-it": "^12.0.4",
-    "nprogress": "^0.2.0",
+    "eslint-watch": "^7.0.0",
+    "pre-commit": "^1.2.2",
     "prettier": "^2.2.1",
-    "react-filterable-table": "^0.3.434"
+    "prettier-eslint": "^12.0.0"
   }
 }

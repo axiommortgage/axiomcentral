@@ -1,27 +1,34 @@
-import Link from 'next/link';
-import style from '../styles/Password.module.scss';
-import alerts from '../styles/ToastsAlerts.module.scss';
+import Link from 'next/link'
+import style from '../styles/Password.module.scss'
+import alerts from '../styles/ToastsAlerts.module.scss'
 
-const ResetPasswordStatus = props => {
-  const { status } = props;
+const ResetPasswordStatus = (props) => {
+  const { status } = props
 
   return (
     <div className={style.message}>
-      {status === 'success' ?
+      {status === 'success' ? (
         <div className={alerts.ax_tip}>
           <p>
-            Your password has been reset successfuly. <Link href="/"><a>Go to Login</a></Link>
+            Your password has been reset successfuly.{' '}
+            <Link href="/">
+              <a>Go to Login</a>
+            </Link>
           </p>
         </div>
-        : ''}
-      {status === 'error' ?
+      ) : (
+        ''
+      )}
+      {status === 'error' ? (
         <div className={alerts.ax_tip_error}>
-          <p>Passwords doesn't match or has less than 5 characters.</p>
+          <p>Passwords doesn&apos;t match or has less than 5 characters.</p>
         </div>
-        : ''}
+      ) : (
+        ''
+      )}
       {status === 'neutral' ? '' : ''}
     </div>
   )
 }
 
-export default ResetPasswordStatus;
+export default ResetPasswordStatus

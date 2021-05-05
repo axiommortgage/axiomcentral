@@ -1,13 +1,12 @@
-import MarkdownIt from 'markdown-it';
+import MarkdownIt from 'markdown-it'
 
-const md = new MarkdownIt();
+const md = new MarkdownIt()
 
-const Markdown = props => {
-  const mdToHtml = md.render(props.children);
-  return (
-    <div dangerouslySetInnerHTML={{ __html: mdToHtml }}>
-    </div>
-  )
+const Markdown = (props) => {
+  const { children } = props
+  const mdToHtml = md.render(children)
+  // eslint-disable-next-line react/no-danger
+  return <div dangerouslySetInnerHTML={{ __html: mdToHtml }} />
 }
 
-export default Markdown;
+export default Markdown

@@ -1,18 +1,15 @@
-import Cookies from 'js-cookie';
-import Router from 'next/router';
-import axios from 'axios';
-
-const apiUrl = process.env.API_HOST;
+import Cookies from 'js-cookie'
+import Router from 'next/router'
 
 export const authStatus = () => {
-  let token = Cookies.get('jwt');
+  const token = Cookies.get('jwt')
   if (token) {
-    return true;
+    return true
   }
-  return false;
+  return false
 }
 
 export const logout = () => {
-  Cookies.remove('jwt');
-  Router.push('/');
+  Cookies.remove('jwt')
+  Router.push('/')
 }
