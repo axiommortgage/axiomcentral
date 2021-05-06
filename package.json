@@ -11,18 +11,20 @@
   "dependencies": {
     "@iconscout/react-unicons": "^1.1.6",
     "@material-ui/icons": "^4.11.2",
+    "@react-pdf/renderer": "^2.0.12",
     "axios": "^0.21.1",
     "framer-motion": "^3.3.0",
     "js-cookie": "^2.2.1",
+    "markdown-it": "^12.0.4",
     "next": "10.0.5",
     "nookies": "^2.5.2",
+    "nprogress": "^0.2.0",
+    "pdf-lib": "^1.16.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "react-indiana-drag-scroll": "^1.8.1",
-    "sass": "^1.32.2",
     "react-filterable-table": "^0.3.434",
-    "markdown-it": "^12.0.4",
-    "nprogress": "^0.2.0"
+    "react-indiana-drag-scroll": "^1.8.1",
+    "sass": "^1.32.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
