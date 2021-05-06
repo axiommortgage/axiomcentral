@@ -1,6 +1,6 @@
 import React from 'react'
 
-let fieldsInfo = {
+const fieldsInfo = {
   name: null,
   aftername: null,
   position: null,
@@ -15,8 +15,8 @@ let fieldsInfo = {
   twitter: null,
   linkedin: null,
   youtube: null
-};
+}
 
-const SignatureContext = React.createContext(fieldsInfo);
+const SignatureContext = React.createContext(fieldsInfo)
 
-export default SignatureContext;
+export default SignatureContext

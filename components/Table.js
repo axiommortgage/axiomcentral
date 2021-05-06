@@ -4,7 +4,6 @@ const Table = (props) => {
 
   const generateRows = () => {
     let i = 0
-    const c = 0
 
     rows.map((row) => {
       // eslint-disable-next-line no-plusplus
@@ -25,9 +24,8 @@ const Table = (props) => {
       return (
         <tr key={rowIndex}>
           {theColumns.map((item) => {
-            for (const col in item) {
-              return <td key={index}>{item[col]}</td>
-            }
+            Object.keys(item).forEach((col) => <td key={item.title}>{item[col]}</td>)
+            return item
           })}
         </tr>
       )
@@ -40,8 +38,8 @@ const Table = (props) => {
     <table cellPadding="0" cellSpacing="0">
       <thead>
         <tr>
-          {headers.map((item, index) => (
-            <th key={index}>{item}</th>
+          {headers.map((item) => (
+            <th key={item.title}>{item}</th>
           ))}
         </tr>
       </thead>

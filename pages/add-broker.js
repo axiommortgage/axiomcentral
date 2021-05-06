@@ -43,61 +43,62 @@ const AddBroker = (props) => {
       const fields = currForm.elements
       const fieldsToValidate = ['username', 'email', 'password', 'firstname', 'lastname', 'brokerage', 'photo']
 
-      for (const field in formInfo) {
-        if (formInfo.hasOwnProperty(field)) {
-          fieldsToValidate.filter((item) => {
-            if (item === field) {
-              if (formInfo[field].length > 0) {
-                validated.push(field)
-              } else {
-                nonValidated.push(field)
-              }
+      Object.keys(formInfo).forEach((field) => {
+        fieldsToValidate.filter((item) => {
+          if (item === field) {
+            if (formInfo[field].length > 0) {
+              validated.push(field)
+            } else {
+              nonValidated.push(field)
             }
-            if (item === 'username') {
-              for (const f in fields) {
-                if (fields[f].name === item) {
-                  if (/[^a-zA-Z0-9]/g.test(fields[f].value)) {
-                    invalidUsername = true
-                    nonValidated.push(item)
-                  }
+          }
+          if (item === 'username') {
+            Object.keys(fields).forEach((f) => {
+              if (fields[f].name === item) {
+                if (/[^a-zA-Z0-9]/g.test(fields[f].value)) {
+                  invalidUsername = true
+                  nonValidated.push(item)
                 }
               }
-            }
-            if (item === 'photo') {
-              for (const f in fields) {
-                if (fields[f].name === item) {
-                  if (fields[f].files[0].size > 500000) {
-                    invalidImage = true
-                    nonValidated.push(item)
-                  }
+            })
+          }
+          if (item === 'photo') {
+            Object.keys(fields).forEach((f) => {
+              if (fields[f].name === item) {
+                if (fields[f].files[0].size > 500000) {
+                  invalidImage = true
+                  nonValidated.push(item)
                 }
               }
-            }
-          })
-        }
-      }
+            })
+          }
+          return item
+        })
+      })
 
       if (nonValidated.length > 0) {
         isValidated = false
 
-        for (const fd in fields) {
+        Object.keys(fields).forEach((fd) => {
           const fieldName = fields[fd].name
 
           nonValidated.filter((i) => {
             if (i === fieldName) {
               fields[fd].style.borderColor = 'red '
             }
+            return i
           })
-        }
-
-        rej({
-          isValidated: false,
-          isUsername: invalidUsername,
-          isImage: invalidImage
         })
+
+        rej(
+          new Error({
+            isValidated: false,
+            isUsername: invalidUsername,
+            isImage: invalidImage
+          })
+        )
       } else {
         isValidated = true
-        console.log('entered validation checker TRUE')
         res({ isValidated, formInfo })
       }
     })
@@ -132,7 +133,7 @@ const AddBroker = (props) => {
         'youtube'
       ]
 
-      for (const n in names) {
+      Object.keys(names).forEach((n) => {
         const fieldVal = names[n].value
         const fieldName = names[n].name
 
@@ -140,12 +141,12 @@ const AddBroker = (props) => {
           if (i === fieldName) {
             info = { ...info, [fieldName]: fieldVal }
           }
+          return i
         })
-      }
+      })
 
       formValidation(info)
         .then((data) => {
-          console.log('After Validation: ', data)
           res(data)
           return data
         })
@@ -156,6 +157,7 @@ const AddBroker = (props) => {
               message: 'Username can be only letters and numbers. Remove any symbols and spaces.',
               showToast: true
             })
+            rej(new Error('Username can be only letters and numbers. Remove any symbols and spaces.'))
           } else if (err.invalidImage === true) {
             setToast({
               toastType: 'error',
@@ -163,18 +165,24 @@ const AddBroker = (props) => {
                 'Image can have a max. of 500kb. Please check other fields as well to see if there are any other errors.',
               showToast: true
             })
+            rej(
+              new Error(
+                'Image can have a max. of 500kb. Please check other fields as well to see if there are any other errors.'
+              )
+            )
           } else {
             setToast({
               toastType: 'error',
               message: 'Ooops! Something went wrong. Please check if you missed any information on the form below.',
               showToast: true
             })
+            rej(new Error('Ooops! Something went wrong. Please check if you missed any information on the form below.'))
           }
-
           return false
         })
     })
-  const API_URL = `${process.env.API_URL}`
+
+  const API_URL = process.env.NEXT_PUBLIC_API_URL
 
   const handleForm = async (e) => {
     e.preventDefault()
@@ -205,40 +213,41 @@ const AddBroker = (props) => {
           const currForm = await form.current
           const names = await currForm.elements
           const fieldsData = Array.from(names)
-          const data = new FormData()
-          data.append('refId', refId)
-          data.append('ref', 'user')
-          data.append('source', 'users-permissions')
+          const regData = new FormData()
+          regData.append('refId', refId)
+          regData.append('ref', 'user')
+          regData.append('source', 'users-permissions')
 
           fieldsData.filter((field) => {
             if (field.name === 'photo' || field.name === 'logoHeader2') {
               if (field.name === 'photo') {
-                data.append('field', 'photo')
+                regData.append('field', 'photo')
                 const photo = field.files[0]
-                data.append('files', photo, photo.name)
+                regData.append('files', photo, photo.name)
               }
             }
+            return field
           })
 
           return { fieldsData, data, refId }
         })
-        .then(async (data) => {
+        .then(async (newData) => {
           // Uploading Photo
-          const formData = data.data
-          const { refId } = data
-          const { fieldsData } = data
-          const uploadPhoto = await axios.post(`${API_URL}/upload`, formData)
+          // const formData = newData.data
+          const { refId } = newData
+          const { fieldsData } = newData
+          // const uploadPhoto = await axios.post(`${API_URL}/upload`, formData)
           return { fieldsData, refId }
         })
-        .then(async (data) => {
+        .then(async (allData) => {
           // Uploading Broker Logo if Cobranded
-          const { fieldsData } = data
+          const { fieldsData } = allData
 
-          fieldsData.filter((field) => {
+          fieldsData.filter(async (field) => {
             if (field.name === 'logoHeader2') {
               if (field.files.length > 0) {
                 const formData = new FormData()
-                const { refId } = data
+                const { refId } = allData
                 formData.append('refId', refId)
                 formData.append('ref', 'user')
                 formData.append('source', 'users-permissions')
@@ -246,16 +255,17 @@ const AddBroker = (props) => {
                 const logoHeader2 = field.files[0]
                 formData.append('files', logoHeader2, logoHeader2.name)
 
-                return axios.post(`${API_URL}/upload`, formData)
+                const upload = await axios.post(`${API_URL}/upload`, formData)
+
+                return upload
               }
-            } else {
             }
           })
 
           return fieldsData
         })
-        .then((data) => {
-          data.forEach((field) => {
+        .then((finalData) => {
+          finalData.forEach((field) => {
             field.value = ''
           })
           setProcessing({
@@ -271,7 +281,6 @@ const AddBroker = (props) => {
         .catch((error) => {
           const errorResponse = error.response.data
           const errorMessage = errorResponse.message[0].messages[0].message
-          console.log(errorResponse.message[0].messages[0].message)
           setProcessing({
             isProcessing: false,
             message: ''
@@ -458,13 +467,13 @@ const AddBroker = (props) => {
           <div className={style.ax_field}>
             <label htmlFor="hasLogo2">Is Cobranded?</label>
             <small>
-              Check below if the website should show 2 logos, the broker's Logo along with Powered By Axiom Logo.
+              Check below if the website should show 2 logos, the broker&quot;s Logo along with Powered By Axiom Logo.
             </small>
             <input type="checkbox" name="hasLogo2" onChange={(e) => onTyping(e)} />
           </div>
 
           <div className={style.ax_field}>
-            <label htmlFor="logoHeader2">Broker's brokerage Logo</label>
+            <label htmlFor="logoHeader2">Broker&quot;s brokerage Logo</label>
             <small>Your brokerage logo that should be placed along with Powered By Axiom Logo.</small>
             <input type="file" name="logoHeader2" onChange={(e) => onTyping(e)} />
           </div>

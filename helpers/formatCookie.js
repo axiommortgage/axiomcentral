@@ -1,12 +1,12 @@
-const getJwt = cookies => {
-  let cookiesList = {}
-  cookies.split(';').forEach( c => {
-    const sections = c.split('=');
-    cookiesList[sections.shift().trim()] = decodeURI(sections.join('='));
-  });
+const getJwt = (cookies) => {
+  const cookiesList = {}
+  cookies.split(';').forEach((c) => {
+    const sections = c.split('=')
+    cookiesList[sections.shift().trim()] = decodeURI(sections.join('='))
+  })
 
-  const token = cookiesList.jwt;
-  return token;
+  const token = cookiesList.jwt
+  return token
 }
 
-export default getJwt;
+export default getJwt
