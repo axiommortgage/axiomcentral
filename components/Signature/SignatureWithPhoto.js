@@ -9,9 +9,9 @@ const Signature = (props) => {
   const signatureHTML = useRef(null)
   const [processing, setProcessing] = useState(false)
   const [context] = useContext(SignatureContext)
-  const { userAuth } = useContext(AuthContext)
+  // const { userAuth } = useContext(AuthContext)
 
-  const user = userAuth.userInfo
+  const { user } = props
   const photoName = typeof user.photo !== 'undefined' ? `${user.photo.hash}${user.photo.ext}` : ''
   const photoUrl = `https://res.cloudinary.com/axiom-mortgage/image/upload/w_120,h_120,q_100,c_fill,g_face,e_improve,r_max,e_sharpen,bo_2px_solid_black/${photoName}`
 

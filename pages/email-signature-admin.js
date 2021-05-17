@@ -118,7 +118,11 @@ const EmailSignature = (props) => {
                 <Form user={signatureUser !== null ? signatureUser[0] : user} />
               </div>
               <div className={style.right_column}>
-                {photo ? <SignatureWithPhoto user={user} logo={logo} /> : <Signature user={user} logo={logo} />}
+                {photo ? (
+                  <SignatureWithPhoto user={signatureUser !== null ? signatureUser[0] : user} logo={logo} />
+                ) : (
+                  <Signature user={signatureUser !== null ? signatureUser[0] : user} logo={logo} />
+                )}
                 <div className={style.actions}>
                   <div>
                     <input type="checkbox" onChange={handlePhoto} />
