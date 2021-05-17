@@ -1,2 +1,10 @@
 @import 'theme';
 @import 'mixins';
+
+.ax_card_list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}

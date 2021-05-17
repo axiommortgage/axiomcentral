@@ -12,17 +12,19 @@ const Printables = (props) => {
   return (
     <Layout>
       <h1 className={style.ax_page_title}>Printables</h1>
-      {Object.keys(data).map((print) => (
-        <Card
-          key={data[print].id}
-          title={data[print].title}
-          description={data[print].description}
-          hasButton
-          linkUrl={`/printable/${data[print].slug}`}
-          icon="./images/ico-pdf.svg"
-          buttonLabel="See Printable"
-        />
-      ))}
+      <div className={style.ax_card_list}>
+        {Object.keys(data).map((print) => (
+          <Card
+            key={data[print].id}
+            title={data[print].title}
+            description={data[print].description}
+            hasButton
+            linkUrl={`/printable/${data[print].slug}`}
+            icon="./images/ico-pdf.svg"
+            buttonLabel="See Printable"
+          />
+        ))}
+      </div>
     </Layout>
   )
 }

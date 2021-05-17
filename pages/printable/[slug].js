@@ -7,27 +7,179 @@ import Layout from '../../components/Layout'
 import style from '../../styles/Printables.module.scss'
 
 const Printable = (props) => {
-  const { data } = props
+  const { printable, user } = props
   const [pdfInfo, setPdfInfo] = useState([])
   const viewer = useRef(null)
 
   const modifyPdf = async () => {
-    const { url } = data[0].document
+    const { contactPosition } = printable[0]
+    const { url } = printable[0].document
     const existingPdfBytes = await fetch(url).then((res) => res.arrayBuffer())
 
     const pdfDoc = await PDFDocument.load(existingPdfBytes)
     const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
 
     const pages = pdfDoc.getPages()
-    const firstPage = pages[0]
-    const { width, height } = firstPage.getSize()
-    firstPage.drawText('This text was added with JavaScript!', {
-      x: 5,
-      y: 100,
-      size: 20,
-      font: helveticaFont,
-      color: rgb(0.51, 0.74, 0)
-    })
+    const lastPage = pages.length - 1
+    const infoPage = pages[lastPage]
+    const { width, height } = infoPage.getSize()
+
+    const formatPhone = (phone) => `${phone.slice(0, 3)}.${phone.slice(3, 6)}.${phone.slice(6, 10)}`
+    const formatedPhone = formatPhone(user.phone)
+
+    const itemPosition = (item, position) => {
+      console.log('PRT', position)
+      if (item === 'title') {
+        switch (position) {
+          case 'columnRight':
+            return {
+              x: width - 192,
+              y: 78,
+              size: 12,
+              font: helveticaFont,
+              color: rgb(1, 1, 1)
+            }
+          case 'bottomLeft':
+            return {
+              x: 25,
+              y: 78,
+              size: 12,
+              font: helveticaFont,
+              color: rgb(1, 1, 1)
+            }
+          default:
+            return {
+              x: 25,
+              y: 78,
+              size: 12,
+              font: helveticaFont,
+              color: rgb(1, 1, 1)
+            }
+        }
+      }
+
+      if (item === 'name') {
+        switch (position) {
+          case 'columnRight':
+            return {
+              x: width - 192,
+              y: 60,
+              size: 12,
+              font: helveticaFont,
+              color: rgb(0.51, 0.74, 0)
+            }
+          case 'bottomLeft':
+            return {
+              x: 25,
+              y: 60,
+              size: 12,
+              font: helveticaFont,
+              color: rgb(0.51, 0.74, 0)
+            }
+          default:
+            return {
+              x: 25,
+              y: 60,
+              size: 12,
+              font: helveticaFont,
+              color: rgb(0.51, 0.74, 0)
+            }
+        }
+      }
+
+      if (item === 'email') {
+        switch (position) {
+          case 'columnRight':
+            return {
+              x: width - 192,
+              y: 48,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(1, 1, 1)
+            }
+          case 'bottomLeft':
+            return {
+              x: 25,
+              y: 48,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(1, 1, 1)
+            }
+          default:
+            return {
+              x: 25,
+              y: 48,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(1, 1, 1)
+            }
+        }
+      }
+
+      if (item === 'phone') {
+        switch (position) {
+          case 'columnRight':
+            return {
+              x: width - 192,
+              y: 35,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(1, 1, 1)
+            }
+          case 'bottomLeft':
+            return {
+              x: 25,
+              y: 35,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(1, 1, 1)
+            }
+          default:
+            return {
+              x: 25,
+              y: 35,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(1, 1, 1)
+            }
+        }
+      }
+
+      if (item === 'website') {
+        switch (position) {
+          case 'columnRight':
+            return {
+              x: width - 192,
+              y: 24,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(1, 1, 1)
+            }
+          case 'bottomLeft':
+            return {
+              x: 25,
+              y: 24,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(1, 1, 1)
+            }
+          default:
+            return {
+              x: 25,
+              y: 24,
+              size: 10,
+              font: helveticaFont,
+              color: rgb(1, 1, 1)
+            }
+        }
+      }
+    }
+
+    infoPage.drawText('Have questions? Contact us.', itemPosition('title', contactPosition))
+    infoPage.drawText(`${user.firstname} ${user.lastname}`, itemPosition('name', contactPosition))
+    infoPage.drawText(user.email, itemPosition('email', contactPosition))
+    infoPage.drawText(formatedPhone, itemPosition('phone', contactPosition))
+    infoPage.drawText(user.website ? user.website : 'axiommortgage.ca', itemPosition('website', contactPosition))
 
     const pdfBytes = await pdfDoc.save()
 
@@ -56,13 +208,14 @@ const apiURL = process.env.NEXT_PUBLIC_API_URL
 export const getServerSideProps = async (ctx) => {
   const tokens = nookies.get(ctx)
   const token = tokens.jwt
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
 
-  const data = await axios
-    .get(`${apiURL}/printables?slug_eq=${ctx.params.slug}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+  const printable = await axios
+    .get(`${apiURL}/printables?slug_eq=${ctx.params.slug}`, config)
     .then((res) => {
       const lenderData = serializeJson(res.data)
       return lenderData
@@ -71,7 +224,17 @@ export const getServerSideProps = async (ctx) => {
       throw error
     })
 
-  return { props: { data } }
+  const user = await axios
+    .get(`${apiURL}/users/me`, config)
+    .then((res) => {
+      const me = res.data
+      return me
+    })
+    .catch((err) => {
+      throw err
+    })
+
+  return { props: { user, printable } }
 }
 
 export default Printable

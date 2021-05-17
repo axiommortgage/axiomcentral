@@ -5,6 +5,7 @@ import style from '../../styles/SignatureForm.module.scss'
 const Form = (props) => {
   const { user } = props
   const form = useRef(null)
+  console.log('USR', user)
 
   // eslint-disable-next-line no-unused-vars
   const [context, setContext] = useContext(SignatureContext)
@@ -43,7 +44,14 @@ const Form = (props) => {
       <form className={style.ax_form} onSubmit={(e) => generateSignature(e)} ref={form}>
         <div className={style.ax_field}>
           <label htmlFor="name">Name</label>
-          <input type="text" name="name" placeholder="Name" defaultValue={`${user.firstname} ${user.lastname}`} />
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            defaultValue={
+              user.firstname !== undefined && user.lastname !== undefined ? `${user.firstname} ${user.lastname}` : ''
+            }
+          />
         </div>
 
         <div className={style.ax_field}>
@@ -53,7 +61,12 @@ const Form = (props) => {
 
         <div className={style.ax_field}>
           <label htmlFor="position">Position</label>
-          <input type="text" name="position" placeholder="I.E: Mortgage Broker, BCS" defaultValue={user.position} />
+          <input
+            type="text"
+            name="position"
+            placeholder="I.E: Mortgage Broker, BCS"
+            defaultValue={user.position ? user.position : ''}
+          />
         </div>
 
         <div className={style.ax_field}>
@@ -68,12 +81,12 @@ const Form = (props) => {
 
         <div className={style.ax_field}>
           <label htmlFor="email">Email</label>
-          <input type="email" name="email" placeholder="johndoe@axiom.ca" defaultValue={user.email} />
+          <input type="email" name="email" placeholder="johndoe@axiom.ca" defaultValue={user.email ? user.email : ''} />
         </div>
 
         <div className={style.ax_field}>
           <label htmlFor="phone">Phone (only numbers, no spaces)</label>
-          <input type="tel" name="phone" placeholder="999-888-7777" defaultValue={user.phone} />
+          <input type="tel" name="phone" placeholder="999-888-7777" defaultValue={user.phone ? user.phone : ''} />
         </div>
 
         <div className={style.ax_field}>

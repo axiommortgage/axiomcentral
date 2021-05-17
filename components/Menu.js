@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import {
+  UilPrint,
   UilSignOutAlt,
   // UilBooks,
   // UilEnvelopeAlt,
@@ -63,6 +64,11 @@ const Menu = () => (
       <div className={styles.ax_menu_item}>
         <UilEditAlt size={20} />
         <Link href="/email-signature"> Email Signature</Link>
+      </div>
+
+      <div className={styles.ax_menu_item}>
+        <UilPrint size={20} />
+        <Link href="/printables"> Printables</Link>
       </div>
 
       {/* <div className={styles.ax_menu_item}>
