@@ -5,7 +5,6 @@ import style from '../../styles/SignatureForm.module.scss'
 const Form = (props) => {
   const { user } = props
   const form = useRef(null)
-  console.log('USR', user)
 
   // eslint-disable-next-line no-unused-vars
   const [context, setContext] = useContext(SignatureContext)
@@ -17,7 +16,7 @@ const Form = (props) => {
     const info = form.current.children
     const infoArr = Array.from(info)
 
-    let signatureData = props.user
+    let signatureData = user
 
     infoArr.forEach((i) => {
       const item = i.querySelector('input')
@@ -48,9 +47,7 @@ const Form = (props) => {
             type="text"
             name="name"
             placeholder="Name"
-            defaultValue={
-              user.firstname !== undefined && user.lastname !== undefined ? `${user.firstname} ${user.lastname}` : ''
-            }
+            defaultValue={user.firstname && user.lastname ? `${user.firstname} ${user.lastname}` : ''}
           />
         </div>
 

@@ -1,16 +1,19 @@
 @import './theme';
 
-.ax_btn{
+.ax_btn {
   display: table;
   width: auto;
-  border-radius: .4rem; 
+  border-radius: 0.4rem;
   font-family: $display-font;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  transition: all .5s ease-out;
+  transition: all 0.5s ease-out;
+  border: none;
+  appearance: none;
 
-  > img, svg{
+  > img,
+  svg {
     display: inline-block;
     width: 3.6rem !important;
     height: 3.6rem !important;
@@ -18,48 +21,48 @@
   }
 }
 
-.ax_btn_small{
+.ax_btn_small {
   height: 3.4rem;
   line-height: 3.4rem;
   font-size: 1.2rem;
   padding: 0 2.4rem;
 }
 
-.ax_btn_medium{
+.ax_btn_medium {
   height: 4rem;
-  line-height:4rem;
+  line-height: 4rem;
   font-size: 1.6rem;
   padding: 0 3.2rem;
 }
 
-.ax_btn_large{
+.ax_btn_large {
   height: 4.8rem;
-  line-height:4.8rem;
+  line-height: 4.8rem;
   font-size: 1.8rem;
   padding: 0 3.6rem;
 }
 
-.ax_btn_xlarge{
+.ax_btn_xlarge {
   height: 5.4rem;
   line-height: 5.4rem;
   font-size: 2.1rem;
   padding: 0 4rem;
 }
 
-.ax_btn_highlight{
+.ax_btn_highlight {
   background: $highlight-color;
   color: $bright-color;
-  &:hover{
-   background: darken($highlight-color, 10);
+  &:hover {
+    background: darken($highlight-color, 10);
   }
 }
 
-.ax_btn_wide{
+.ax_btn_wide {
   display: block;
   width: 100%;
 }
 
-.ax_btn_centered{
+.ax_btn_centered {
   margin-left: auto;
   margin-right: auto;
 }

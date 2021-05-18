@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import axios from 'axios'
 import nookies from 'nookies'
@@ -44,7 +44,9 @@ const EmailSignature = (props) => {
   const [logo, setLogo] = useState(false)
   const [searchEmail, setSearchEmail] = useState(null)
   const [signatureUser, setSignatureUser] = useState(null)
-  // const [validation, setValidation] = useState(true)
+  const [validation, setValidation] = useState(null)
+  const [validationMessage, setValidationMessage] = useState('')
+  const [processing, setProcessing] = useState(false)
 
   const handlePhoto = () => {
     setPhoto(!photo)
@@ -54,39 +56,51 @@ const EmailSignature = (props) => {
     setLogo(!logo)
   }
 
-  useEffect(() => {
-    const API_URL = process.env.NEXT_PUBLIC_API_URL
+  const API_URL = process.env.NEXT_PUBLIC_API_URL
+
+  const fetchSignatureUser = async () => {
+    setProcessing(true)
+    const token = await Cookies.get('jwt')
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+
     const validateEmail = /^[a-z0-9.]+@[a-z0-9]+.[a-z]+.([a-z]+)?$/i
 
-    if (searchEmail !== null && validateEmail.test(String(searchEmail).toLowerCase())) {
-      const fetchSignatureUser = async () => {
-        const token = await Cookies.get('jwt')
-
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-
-        const signatureUserData = await axios
-          .get(`${API_URL}/users?email_eq=${searchEmail}`, config)
-          .then((res) => {
-            const { data } = res
+    if (validateEmail.test(String(searchEmail).toLowerCase())) {
+      setValidation(true)
+      const signatureUserData = await axios
+        .get(`${API_URL}/users?email_eq=${searchEmail}`, config)
+        .then((res) => {
+          const { data } = res
+          if (data.length === 0) {
+            setValidationMessage('Email not found. Please insert a valid email.')
+            setProcessing(false)
+          } else {
             const serializedData = serializeJson(data)
-
-            setSignatureUser(serializedData)
+            setSignatureUser(serializedData[0])
+            setValidationMessage(`User: ${serializedData[0].firstname} ${serializedData[0].lastname}`)
+            setProcessing(false)
             return serializedData
-          })
-          .catch((err) => {
-            throw err
-          })
+          }
+        })
+        .catch((err) => {
+          setValidationMessage(
+            'Ooops. Something went wrong. Please check if the entered email is correct or try again.'
+          )
+          setProcessing(false)
+          setValidation(false)
+          throw err
+        })
 
-        return signatureUserData
-      }
-
-      fetchSignatureUser()
+      return signatureUserData
     }
-  }, [searchEmail])
+    setValidation(false)
+    setProcessing(false)
+  }
 
   return (
     <SignatureContext.Provider value={[context, setContext]}>
@@ -106,22 +120,27 @@ const EmailSignature = (props) => {
               <div className={style.left_column}>
                 <div className={style.ax_field}>
                   <label htmlFor="aftername">Search Broker (by email)</label>
-                  <input
-                    type="email"
-                    placeholder="Broker registration e-mail"
-                    value={searchEmail}
-                    onChange={(e) => setSearchEmail(e.target.value)}
-                  />{' '}
-                  {/* {validation === false ? <p>Please insert a valid broker email</p> : ''} */}
+                  <div className={style.ax_search}>
+                    <input
+                      type="email"
+                      placeholder="Broker registration e-mail"
+                      value={searchEmail}
+                      onChange={(e) => setSearchEmail(e.target.value)}
+                    />
+                    <button type="button" onClick={fetchSignatureUser}>
+                      {processing ? <img src="/images/spinner-white.svg" alt="spinner" /> : ''}Find User
+                    </button>
+                  </div>
+                  <p>{validationMessage}</p>
                 </div>
 
-                <Form user={signatureUser !== null ? signatureUser[0] : user} />
+                <Form user={signatureUser !== null ? signatureUser : user} />
               </div>
               <div className={style.right_column}>
                 {photo ? (
-                  <SignatureWithPhoto user={signatureUser !== null ? signatureUser[0] : user} logo={logo} />
+                  <SignatureWithPhoto user={signatureUser !== null ? signatureUser : user} logo={logo} />
                 ) : (
-                  <Signature user={signatureUser !== null ? signatureUser[0] : user} logo={logo} />
+                  <Signature user={signatureUser !== null ? signatureUser : user} logo={logo} />
                 )}
                 <div className={style.actions}>
                   <div>

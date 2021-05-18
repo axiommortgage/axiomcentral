@@ -1,6 +1,5 @@
 import { useContext, useRef, useState } from 'react'
 import SignatureContext from '../../context/signatureContext'
-import AuthContext from '../../context/authContext'
 import SocialIcons from './SocialIcons'
 import style from '../../styles/Signature.module.scss'
 import Toast from '../Toast'
