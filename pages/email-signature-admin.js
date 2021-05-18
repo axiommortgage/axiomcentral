@@ -44,7 +44,6 @@ const EmailSignature = (props) => {
   const [logo, setLogo] = useState(false)
   const [searchEmail, setSearchEmail] = useState(null)
   const [signatureUser, setSignatureUser] = useState(null)
-  const [validation, setValidation] = useState(null)
   const [validationMessage, setValidationMessage] = useState('')
   const [processing, setProcessing] = useState(false)
 
@@ -71,7 +70,6 @@ const EmailSignature = (props) => {
     const validateEmail = /^[a-z0-9.]+@[a-z0-9]+.[a-z]+.([a-z]+)?$/i
 
     if (validateEmail.test(String(searchEmail).toLowerCase())) {
-      setValidation(true)
       const signatureUserData = await axios
         .get(`${API_URL}/users?email_eq=${searchEmail}`, config)
         .then((res) => {
@@ -92,13 +90,11 @@ const EmailSignature = (props) => {
             'Ooops. Something went wrong. Please check if the entered email is correct or try again.'
           )
           setProcessing(false)
-          setValidation(false)
           throw err
         })
 
       return signatureUserData
     }
-    setValidation(false)
     setProcessing(false)
   }
 

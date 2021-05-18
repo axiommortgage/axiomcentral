@@ -1,0 +1,72 @@
+@import 'theme';
+@import 'mixins';
+
+.canvas {
+  width: 100rem;
+  height: 100rem;
+  display: block;
+  border: 1px solid red;
+  position: relative;
+}
+
+.handle {
+  width: auto;
+  cursor: move;
+  display: table;
+}
+
+.dragglableInfo {
+  font-family: $display-font;
+  font-size: 1.6rem;
+  padding: 1.6rem;
+  display: table;
+  width: auto;
+  cursor: move;
+
+  input {
+    background: transparent;
+    font-family: $display-font;
+    font-size: 2.4rem;
+    font-weight: 700;
+    appearance: none;
+    box-shadow: none;
+    border: none;
+  }
+}
+
+.actions {
+  position: fixed;
+  top: 12rem;
+  right: 8rem;
+  background: $bright-color;
+  border-radius: 0.8rem;
+  box-shadow: $shadow-large;
+  padding: 1.2rem;
+  z-index: 300;
+  width: 30rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  label {
+    font-family: $display-font;
+    font-size: 1.4rem;
+    color: $highlight-dark;
+    font-weight: 600;
+
+    input[type='checkbox'] {
+      font-family: $display-font;
+      font-size: 1.4rem;
+      color: $base-color;
+      font-weight: 400;
+    }
+  }
+
+  .boundingBox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+}
