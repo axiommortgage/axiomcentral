@@ -31,10 +31,16 @@ const Login = () => {
         setProcessing(false)
 
         const { jwt } = res.data
+        const userId = res.data.user.id
 
         setUserAuth({ isAuth: true, userInfo: res.data.user })
 
         setCookie(null, 'jwt', jwt, {
+          maxAge: 30 * 24 * 60 * 60,
+          path: '/'
+        })
+
+        setCookie(null, 'userId', userId, {
           maxAge: 30 * 24 * 60 * 60,
           path: '/'
         })

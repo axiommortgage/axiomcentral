@@ -11,103 +11,111 @@ $display-font: 'Montserrat', sans-serif;
 $body-font: 'Open Sans', sans-serif;
 $shadow: 2px 2px 8px rgba(45, 44, 48, 0.15);
 $shadow-large: 8px 8px 24px rgba(45, 44, 48, 0.15);
-$cubic-transition: cubic-bezier(0,.83,.42,1.01);
+$cubic-transition: cubic-bezier(0, 0.83, 0.42, 1.01);
 
-
-
-@media screen and (min-width: 0) and (max-width: 767px){
-
+@media screen and (min-width: 0) and (max-width: 767px) {
   .ax_section {
-    p{
+    p {
       font-size: 1.6rem;
       font-family: $body-font;
     }
   }
 
-  .ax_container{
+  .ax_container {
     width: 90%;
     display: block;
-    margin: 0 auto; 
+    margin: 0 auto;
 
-    p{
+    p {
       font-family: $body-font;
       font-size: 1.4rem;
       color: $base-color;
-    }   
+    }
   }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1199px){
+@media screen and (min-width: 768px) and (max-width: 1199px) {
   .ax_section {
-    p{
+    p {
       font-size: 1.6rem;
       font-family: $body-font;
     }
   }
 
-  .ax_container{
+  .ax_container {
     width: 74rem;
     display: block;
     margin: 0 auto;
   }
 }
 
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1200px) {
   .ax_section {
-    p{
+    p {
       font-size: 1.6rem;
       font-family: $body-font;
     }
   }
-  
-  .ax_container{
+
+  .ax_container {
     width: 114rem;
     display: block;
     margin: 0 auto;
   }
 }
 
-.ax_page_title{
+.ax_page_title {
   font-family: $display-font;
   font-size: 3.2rem;
   color: $base-color;
- }
+}
 
-.ax_form{
-  .ax_form_heading{
+.ax_page_subtitle {
+  font-family: $display-font;
+  font-size: 2.4rem;
+  color: $highlight-dark;
+}
+
+.ax_form {
+  .ax_form_heading {
     width: 100%;
     margin-bottom: 1.6rem;
 
-    p{
+    p {
       font-size: 1.6rem;
       font-family: $body-font;
     }
   }
-  .ax_field{
+  .ax_field {
     display: flex;
-    flex-direction: column;  
-    position: relative;  
+    flex-direction: column;
+    position: relative;
 
-    label{
+    label {
       color: $highlight-dark;
       font-family: $display-font;
       font-size: 1.4rem;
       font-weight: 700;
       display: block;
       width: 100%;
-      margin-bottom: .4rem;
+      margin-bottom: 0.4rem;
 
-      span{
+      span {
         color: red;
         font-weight: 800;
         font-size: 1.6rem;
       }
     }
 
-    textarea, input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="tel"] {
+    textarea,
+    input[type='text'],
+    input[type='email'],
+    input[type='password'],
+    input[type='number'],
+    input[type='tel'] {
       width: 100%;
-      border-radius: .4rem;
-      border: .1rem solid $mid-gray;
+      border-radius: 0.4rem;
+      border: 0.1rem solid $mid-gray;
       background: $light-gray;
       padding: 0 4rem 0 1.6rem;
       color: $base-color;
@@ -117,16 +125,24 @@ $cubic-transition: cubic-bezier(0,.83,.42,1.01);
       margin-bottom: 1.6rem;
     }
 
-    input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="tel"], input[type="date"], input[type="time"], input[type="number"], input[type="url"] {
+    input[type='text'],
+    input[type='email'],
+    input[type='password'],
+    input[type='number'],
+    input[type='tel'],
+    input[type='date'],
+    input[type='time'],
+    input[type='number'],
+    input[type='url'] {
       height: 4rem;
 
-      &::placeholder{
+      &::placeholder {
         font-weight: 400;
         color: $mid-gray;
       }
     }
 
-    button.see{
+    button.see {
       position: absolute;
       top: 2.2rem;
       right: 0;
@@ -135,24 +151,23 @@ $cubic-transition: cubic-bezier(0,.83,.42,1.01);
       border: none;
       background: transparent;
 
-
-      svg{
+      svg {
         color: $base-mid-color;
       }
     }
 
-    small{
+    small {
       font-family: $display-font;
       font-size: 1.4rem;
     }
 
-    input[type="checkbox"]{
+    input[type='checkbox'] {
       margin-bottom: 1.6rem;
     }
 
-    input[type="submit"]{
+    input[type='submit'] {
       height: 4rem;
-      border-radius: .4rem;
+      border-radius: 0.4rem;
       background: $highlight-color;
       color: $bright-color;
       font-family: $display-font;
@@ -160,16 +175,27 @@ $cubic-transition: cubic-bezier(0,.83,.42,1.01);
       font-weight: 600;
       border: none;
     }
-
   }
-  
 }
 
-.ax_card_list{
+.ax_card_list {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
-  
+}
+
+.boxedLoading {
+  width: 100%;
+  height: 100%;
+  background: rgba(170, 247, 166, 0.8);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 500;
 }

@@ -15,7 +15,7 @@ import {
   // UilMoneyWithdraw,
   // UilGlobe,
   UilUniversity,
-  // UilMegaphone,
+  UilMegaphone,
   // UilCalender,
   UilApps,
   UilUser,
@@ -46,10 +46,10 @@ const Menu = () => (
         <Link href="/technology"> Technology</Link>
       </div>
 
-      {/* <div className={styles.ax_menu_item}>
-          <UilMegaphone size={20} />
-          <Link href="/marketing"> Marketing</Link>
-        </div> */}
+      <div className={styles.ax_menu_item}>
+        <UilMegaphone size={20} />
+        <Link href="/marketing"> Marketing</Link>
+      </div>
 
       <div className={styles.ax_menu_item}>
         <UilUniversity size={20} />

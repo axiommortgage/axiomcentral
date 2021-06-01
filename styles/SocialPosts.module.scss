@@ -70,3 +70,68 @@
     justify-content: flex-start;
   }
 }
+
+.imageList {
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  .imageItem {
+    display: block;
+    height: auto;
+
+    img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+
+  @include responsive(mobile) {
+    .imageItem {
+      width: 100%;
+      margin-bottom: 3.2rem;
+      margin-right: 0;
+    }
+  }
+
+  @include responsive(tablet) {
+    .imageItem {
+      width: calc(33% - 3.2rem);
+      margin-right: 3.2rem;
+      margin-bottom: 3.2rem;
+    }
+  }
+
+  @include responsive(desktop) {
+    .imageItem {
+      width: calc(25% - 3.2rem);
+      margin-right: 3.2rem;
+      margin-bottom: 3.2rem;
+    }
+  }
+}
+
+.btnDownload {
+  height: 4rem;
+  font-size: 1.6rem;
+  color: $bright-color;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  border-radius: 0.4rem;
+  border: none;
+  background-color: $highlight-color;
+  transition: all 0.3s ease-out;
+  padding: 0 3.2rem;
+  cursor: pointer;
+
+  &:hover {
+    background: $base-color;
+    color: $bright-color;
+  }
+}

@@ -1,0 +1,80 @@
+@import 'theme';
+@import 'mixins';
+
+.calendarContainer {
+  position: relative;
+  width: 100%;
+  display: table;
+  height: auto;
+}
+
+.calendar {
+  font-family: $display-font;
+  font-size: 1.6rem;
+
+  > div:first-child {
+    padding: 1.6rem;
+    background: $bright-color;
+    border: 0.1rem solid $mid-gray;
+    transition: all 0.2s ease-out;
+    box-sizing: border-box;
+
+    button {
+      background: transparent;
+      border: none;
+      font-family: $display-font;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: $highlight-dark;
+      border-radius: 0.4rem;
+      height: 4rem;
+
+      &:hover {
+        background-color: $highlight-color;
+        color: $bright-color;
+        cursor: pointer;
+      }
+    }
+  }
+
+  > div:nth-child(2) {
+    abbr[aria-label='Monday'],
+    abbr[aria-label='Tuesday'],
+    abbr[aria-label='Wednesday'],
+    abbr[aria-label='Thursday'],
+    abbr[aria-label='Friday'],
+    abbr[aria-label='Saturday'],
+    abbr[aria-label='Sunday'] {
+      font-family: $display-font;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: $highlight-dark;
+      height: 4rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+    }
+  }
+}
+
+.day {
+  width: 8rem;
+  height: 8rem;
+  display: block;
+  padding: 1.6rem;
+  background: $bright-color;
+  border: 0.1rem solid $mid-gray;
+  transition: all 0.2s ease-out;
+  box-sizing: border-box;
+  font-family: $display-font;
+  font-size: 1.6rem;
+  font-weight: 600;
+
+  &:hover {
+    background-color: $highlight-color;
+    color: $bright-color;
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+}

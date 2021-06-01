@@ -1,6 +1,6 @@
 import axios from 'axios'
 import nookies from 'nookies'
-import Canvas from '../../components/SocialPosts/Canvas'
+import SocialPostsList from '../../components/SocialPosts/SocialPostsList'
 import { serializeJson } from '../../helpers/serializeData'
 import Layout from '../../components/Layout'
 import style from '../../styles/Printables.module.scss'
@@ -11,7 +11,7 @@ const SocialPost = (props) => {
   return (
     <Layout>
       <h1 className={style.ax_page_title}>Social Media Posts</h1>
-      <Canvas posts={posts} user={user} />
+      <SocialPostsList posts={posts} user={user} />
     </Layout>
   )
 }
