@@ -1,7 +1,31 @@
 @import 'theme';
 
-.ax_card_list{
+.ax_card_list {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+}
+
+.cardPurple {
+  background: lighteen($purple, 10);
+}
+
+.cardGreen {
+  background: lighteen($green, 10);
+}
+
+.cardOrange {
+  background: lighteen($orange, 10);
+}
+
+.cardBlue {
+  background: lighteen($blue, 10);
+}
+
+.cardTeal {
+  background: lighteen($teal, 10);
+}
+
+.cardYellow {
+  background: lighteen($yellow, 10);
 }

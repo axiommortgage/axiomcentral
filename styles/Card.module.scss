@@ -1,7 +1,7 @@
 @import './styles/theme';
 @import './styles/mixins';
 
-.ax_card_with_icon{
+.ax_card_with_icon {
   width: 100%;
   height: 100%;
   display: flex;
@@ -10,37 +10,38 @@
   text-align: center;
   box-sizing: border-box;
   position: relative;
-  margin: 0 1.6rem 3.2rem 0 ;
+  margin: 0 1.6rem 3.2rem 0;
   padding: 1.6rem;
-  border-radius: .6rem;
+  border-radius: 0.6rem;
   background: $bright-color;
-  transition: all .5s $cubic-transition;      
+  transition: all 0.5s $cubic-transition;
 
-  &:hover{
+  &:hover {
     transform: scale(1.02);
+    cursor: pointer;
   }
 
-  .ax_card_body{
+  .ax_card_body {
     width: 100%;
     display: table;
 
-    h3{
+    h3 {
       font-family: $display-font;
       font-size: 1.8rem;
-      color: $highlight-color !important;
+      color: $highlight-color;
       font-weight: 700;
     }
-  
-    p{
+
+    p {
       font-family: $body-font;
       font-size: 1.4rem;
       line-height: 2.1rem;
       color: $base-color;
-      font-weight: 400 ;
+      font-weight: 400;
     }
   }
 
-  a{
+  a {
     width: calc(100% - 3.2rem);
     margin-left: auto;
     margin-right: auto;
@@ -55,9 +56,9 @@
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    text-align: center;   
+    text-align: center;
 
-    img{
+    img {
       width: 80%;
       max-width: 80%;
       height: auto;
@@ -71,15 +72,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto ;
+    margin: 0 auto;
     background: $base-color;
     border-radius: 50%;
-    padding: 0;   
-    text-align: center; 
-    overflow: hidden;  
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
     position: relative;
 
-    img{
+    img {
       width: 100%;
       max-width: 100%;
       height: auto;
@@ -95,21 +96,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto ;
+    margin: 0 auto;
     background: transparent;
-    padding: 0;   
-    text-align: center; 
-    overflow: hidden;  
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
     position: relative;
 
-    img{
+    img {
       width: 100%;
       max-width: 100%;
       height: auto;
       display: block;
       position: absolute;
       top: 0;
-      padding-top: 1.6rem;    
+      padding-top: 1.6rem;
     }
   }
 }
@@ -118,7 +119,7 @@
   width: 100% !important;
   display: flex !important;
   justify-content: space-between !important;
-  text-align: left !important; 
+  text-align: left !important;
 
   .ax_card_with_icon {
     display: flex !important;
@@ -128,64 +129,112 @@
   .ax_card_icon {
     width: 10rem;
   }
- 
-  .ax_card_body{
-    width: calc( 100% - 12rem);
-    text-align: left;    
+
+  .ax_card_body {
+    width: calc(100% - 12rem);
+    text-align: left;
   }
 
-  @include responsive(desktop){
-    a{
+  @include responsive(desktop) {
+    a {
       width: 16rem !important;
       right: 1.6rem !important;
     }
   }
 
-  @include responsive(tablet){
-    a{
+  @include responsive(tablet) {
+    a {
       width: 16rem !important;
       right: 1.6rem !important;
     }
   }
 
-  @include responsive(mobile){
+  @include responsive(mobile) {
     .ax_card_with_icon {
-      margin-right: 0;      
+      margin-right: 0;
     }
-    
+
     .ax_card_icon {
       width: 10rem;
     }
-   
-    .ax_card_body{
+
+    .ax_card_body {
       width: 100%;
       text-align: center;
     }
 
-    a{
+    a {
       width: calc(100% -3.2rem) !important;
       right: 1.6rem !important;
-    }    
+    }
   }
 }
 
-@include responsive(desktop){
+@include responsive(desktop) {
   .ax_card_vertical {
-    width:  calc(20% - 3.2rem) !important;
+    width: calc(20% - 3.2rem) !important;
     margin: 0 1.6rem 2.4rem;
-  }  
+  }
 }
 
-@include responsive(tablet){
+@include responsive(tablet) {
   .ax_card_vertical {
     width: calc(33% - 3.2rem) !important;
     margin: 0 1.6rem 2.4rem;
-  }  
+  }
 }
 
-@include responsive(mobile){
+@include responsive(mobile) {
   .ax_card_vertical {
     width: 100% !important;
     margin: 0 0 2.4rem;
-  }  
+  }
+}
+
+.purple {
+  background: lighten($purple, 40%);
+
+  h3 {
+    color: $base-color !important;
+  }
+}
+
+.green {
+  background: lighten($green, 40%);
+
+  h3 {
+    color: $base-color !important;
+  }
+}
+
+.orange {
+  background: lighten($orange, 40%);
+
+  h3 {
+    color: $base-color !important;
+  }
+}
+
+.blue {
+  background: lighten($blue, 40%);
+
+  h3 {
+    color: $base-color !important;
+  }
+}
+
+.teal {
+  background: lighten($teal, 40%);
+
+  h3 {
+    color: $base-color !important;
+  }
+}
+
+.yellow {
+  background: lighten($yellow, 40%);
+
+  h3 {
+    color: $base-color !important;
+  }
 }

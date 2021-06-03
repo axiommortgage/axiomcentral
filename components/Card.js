@@ -2,11 +2,44 @@ import style from '../styles/Card.module.scss'
 import Button from './Button'
 
 const CardWithIcon = (props) => {
-  const { cardWide, icon, photo, iconSquared, title, description, hasButton, linkUrl, buttonLabel, openInBlank } = props
+  const {
+    cardWide,
+    icon,
+    color,
+    photo,
+    iconSquared,
+    title,
+    description,
+    hasButton,
+    linkUrl,
+    buttonLabel,
+    openInBlank,
+    clickEvent
+  } = props
+
+  const handleColor = () => {
+    switch (color) {
+      case 'purple':
+        return style.purple
+      case 'orange':
+        return style.orange
+      case 'blue':
+        return style.blue
+      case 'green':
+        return style.green
+      case 'yellow':
+        return style.yellow
+      case 'teal':
+        return style.teal
+      default:
+    }
+  }
+
+  const cardColor = handleColor()
 
   return (
-    <div className={`${cardWide ? style.ax_card_wide : style.ax_card_vertical}`}>
-      <div className={`${style.ax_card_with_icon}`}>
+    <div className={`${cardWide ? style.ax_card_wide : style.ax_card_vertical}`} onClick={clickEvent}>
+      <div className={`${style.ax_card_with_icon} ${cardColor}`}>
         <div
           className={`${icon ? style.ax_card_icon : ''} ${iconSquared ? style.ax_card_icon_squared : ''} ${
             photo ? style.ax_card_photo : ''

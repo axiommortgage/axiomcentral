@@ -13,6 +13,7 @@ const SocialIcons = () => {
             context.facebook !== null
               ? {
                   display: 'table-cell',
+                  verticalAlign: 'middle',
                   lineHeight: '22px',
                   height: '22px',
                   paddingBottom: '0',
@@ -23,7 +24,7 @@ const SocialIcons = () => {
           }
         >
           <a
-            style={{ width: '22px', height: '22px', marginLeft: '4px', textAlign: 'right' }}
+            style={{ width: '22px', height: '22px', display: 'table', marginLeft: '4px', textAlign: 'right' }}
             href={context.facebook === null ? '#' : context.facebook}
             target="_blank"
             rel="noreferrer"
@@ -47,6 +48,7 @@ const SocialIcons = () => {
             context.instagram !== null
               ? {
                   display: 'table-cell',
+                  verticalAlign: 'middle',
                   lineHeight: '22px',
                   height: '22px',
                   paddingBottom: '0',
@@ -57,7 +59,7 @@ const SocialIcons = () => {
           }
         >
           <a
-            style={{ width: '22px', height: '22px', marginLeft: '4px', textAlign: 'right' }}
+            style={{ width: '22px', height: '22px', display: 'table', marginLeft: '4px', textAlign: 'right' }}
             href={context.instagram === null ? '#' : context.instagram}
             target="_blank"
             rel="noreferrer"
@@ -81,6 +83,7 @@ const SocialIcons = () => {
             context.linkedin !== null
               ? {
                   display: 'table-cell',
+                  verticalAlign: 'middle',
                   lineHeight: '22px',
                   height: '22px',
                   paddingBottom: '0',
@@ -91,7 +94,7 @@ const SocialIcons = () => {
           }
         >
           <a
-            style={{ width: '22px', height: '22px', marginLeft: '4px', textAlign: 'right' }}
+            style={{ width: '22px', height: '22px', display: 'table', marginLeft: '4px', textAlign: 'right' }}
             href={context.linkedin === null ? '#' : context.linkedin}
             target="_blank"
             rel="noreferrer"
@@ -114,6 +117,7 @@ const SocialIcons = () => {
             context.twitter !== null
               ? {
                   display: 'table-cell',
+                  verticalAlign: 'middle',
                   lineHeight: '22px',
                   height: '22px',
                   paddingBottom: '0',
@@ -124,7 +128,7 @@ const SocialIcons = () => {
           }
         >
           <a
-            style={{ width: '22px', height: '22px', marginLeft: '4px', textAlign: 'right' }}
+            style={{ width: '22px', height: '22px', display: 'table', marginLeft: '4px', textAlign: 'right' }}
             href={context.twitter === null ? '#' : context.twitter}
             target="_blank"
             rel="noreferrer"
@@ -147,6 +151,7 @@ const SocialIcons = () => {
             context.youtube !== null
               ? {
                   display: 'table-cell',
+                  verticalAlign: 'middle',
                   lineHeight: '22px',
                   height: '22px',
                   paddingBottom: '0',
@@ -157,7 +162,7 @@ const SocialIcons = () => {
           }
         >
           <a
-            style={{ width: '22px', height: '22px', marginLeft: '4px', textAlign: 'right' }}
+            style={{ width: '22px', height: '22px', display: 'table', marginLeft: '4px', textAlign: 'right' }}
             href={context.youtube === null ? '#' : context.youtube}
             target="_blank"
             rel="noreferrer"

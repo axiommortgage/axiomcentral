@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
-import Cookies from 'js-cookie'
 import nookies from 'nookies'
 import axios from 'axios'
 import Calendar from 'react-calendar'
