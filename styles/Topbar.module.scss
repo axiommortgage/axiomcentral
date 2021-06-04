@@ -3,8 +3,9 @@
 
 .ax_loading_bar {
   background: $highlight-color !important;
-  height: .8rem !important;
+  height: 0.8rem !important;
   z-index: 2000;
+
   .ax_loading_peg {
     box-shadow: none !important;
   }
@@ -12,13 +13,13 @@
 
 .ax_loading_spinner {
   z-index: 2000;
-  .ax_loading_spinner_icon{
+  .ax_loading_spinner_icon {
     border-top-color: $highlight-color !important;
     border-left-color: $highlight-color !important;
   }
 }
 
-.ax_topbar{
+.ax_topbar {
   grid-area: topbar;
   width: 100vw;
   height: 7rem;
@@ -47,7 +48,7 @@
     justify-content: flex-end;
     position: relative;
 
-    .ax_noftfs_button{
+    .ax_noftfs_button {
       background: transparent;
       border: none;
       width: 4rem;
@@ -57,7 +58,7 @@
       cursor: pointer;
       position: relative;
 
-      span{
+      span {
         width: 1.8rem;
         height: 1.8rem;
         border-radius: 50%;
@@ -70,15 +71,15 @@
         font-family: $display-font;
         line-height: 1.6rem;
         position: absolute;
-        top: -.4rem;
+        top: -0.4rem;
         right: 0rem;
       }
     }
 
-    svg{
+    svg {
       color: $highlight-color;
 
-      &:hover{
+      &:hover {
         color: $base-color;
       }
     }
@@ -90,6 +91,4 @@
       color: $base-color;
     }
   }
-
-  
 }

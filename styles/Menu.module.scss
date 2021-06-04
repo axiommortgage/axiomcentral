@@ -19,14 +19,14 @@
     .ax_menu_item {
       width: 100%;
       display: flex;
+      flex-wrap: wrap;
       justify-content: flex-start;
       align-items: center;
-      height: 4rem;
+      height: auto;
       cursor: pointer;
 
       svg {
         margin-right: 0.8rem;
-        color: $highlight-color;
       }
 
       a {
@@ -37,7 +37,7 @@
         font-weight: 400;
 
         &:hover {
-          color: $highlight-color;
+          color: $bright-color;
         }
       }
 
@@ -53,6 +53,88 @@
 
         &:hover {
           color: $highlight-color;
+        }
+      }
+
+      .ax_submenu_item {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 3.4rem;
+        cursor: pointer;
+        margin-left: 2.8rem;
+        position: relative;
+
+        &:before {
+          content: '';
+          width: 1rem;
+          height: 1.6rem;
+          display: block;
+          border-left: thin solid $mid-gray;
+          border-bottom: thin solid $mid-gray;
+          position: absolute;
+          top: 0;
+          left: -1.4rem;
+          opacity: 0.7;
+        }
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    .menuGreen {
+      a:nth-child(1) {
+        color: $green;
+        &:hover {
+          color: $bright-color;
+        }
+      }
+    }
+
+    .menuYellow {
+      a:nth-child(1) {
+        color: $yellow;
+        &:hover {
+          color: $bright-color;
+        }
+      }
+    }
+
+    .menuBlue {
+      a:nth-child(1) {
+        color: $blue;
+        &:hover {
+          color: $bright-color;
+        }
+      }
+    }
+
+    .menuOrange {
+      a:nth-child(1) {
+        color: $orange;
+        &:hover {
+          color: $bright-color;
+        }
+      }
+    }
+
+    .menuPurple {
+      a:nth-child(1) {
+        color: $purple;
+        &:hover {
+          color: $bright-color;
+        }
+      }
+    }
+
+    .menuTeal {
+      a:nth-child(1) {
+        color: $teal;
+        &:hover {
+          color: $bright-color;
         }
       }
     }

@@ -11,7 +11,6 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <AuthContext.Provider value={{ userAuth, setUserAuth }}>
       <AnimatePresence exitBeforeEnter>
-        {}
         <Component {...pageProps} />
       </AnimatePresence>
     </AuthContext.Provider>

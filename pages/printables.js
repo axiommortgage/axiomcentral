@@ -20,7 +20,7 @@ const Printables = (props) => {
             description={data[print].description}
             hasButton
             linkUrl={`/printable/${data[print].slug}`}
-            icon="./images/ico-pdf.svg"
+            iconSquared="./images/ico-pdf.svg"
             buttonLabel="See Printable"
           />
         ))}

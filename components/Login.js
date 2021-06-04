@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { setCookie } from 'nookies'
+import { UilEye, UilEyeSlash } from '@iconscout/react-unicons'
 import styles from '../styles/Login.module.scss'
 import AuthContext from '../context/authContext'
 
@@ -11,6 +12,7 @@ const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [processing, setProcessing] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   // eslint-disable-next-line no-unused-vars
   const { userAuth, setUserAuth } = useContext(AuthContext)
 
@@ -59,17 +61,33 @@ const Login = () => {
     return data
   }
 
+  const handlePassword = () => {
+    setShowPassword(!showPassword)
+  }
+
   return (
     <section className={styles.ax_login}>
       <div className={styles.ax_login_left_column} />
       <div className={styles.ax_login_right_column}>
         <img src="./images/axiom-a-logo.svg" alt="Axiom Logo" />
-        <form className={styles.ax_login_form}>
-          <label htmlFor="email">Email</label>
-          <input type="email" name="email" placeholder="Email" onChange={(e) => setUsername(e.target.value)} />
+        <form className={`${styles.ax_login_form} ${styles.ax_form}`}>
+          <div className={styles.ax_field}>
+            <label htmlFor="email">Email</label>
+            <input type="email" name="email" placeholder="Email" onChange={(e) => setUsername(e.target.value)} />
+          </div>
 
-          <label htmlFor="password">Password</label>
-          <input type="password" name="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+          <div className={styles.ax_field}>
+            <label htmlFor="password">Password</label>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button className={styles.btnShowPassword} type="button" onClick={handlePassword}>
+              {showPassword ? <UilEye size={16} /> : <UilEyeSlash size={16} />}
+            </button>
+          </div>
 
           <button type="submit" onClick={(e) => handleLogin(e)}>
             {processing ? <img src="/images/spinner-white.svg" alt="spinner" /> : ''}Login

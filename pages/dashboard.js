@@ -13,43 +13,44 @@ const Dashboard = () => {
       <h1 className={style.ax_page_title}>Dashboard</h1>
       <div className={style.ax_card_list}>
         {/* <Card
-          iconSquared="./images/branding-icon.svg"
+          icon="./images/branding-icon.svg"
           title="Branding"
           description="Logos, graphics and guidelines"
           color="purple"
                     clickEvent={() => router.push('/branding')}
 
         /> */}
-        <Card
-          iconSquared="./images/technology-icon.svg"
-          title="Technology"
-          description="Tech, tools and more"
-          color="blue"
-          clickEvent={() => router.push('/technology')}
-        />
         {/* <Card
-          iconSquared="./images/events-icon.svg"
+          icon="./images/events-icon.svg"
           title="Events"
           description="Upcoming and past Axiom events"
           color="orange"
           clickEvent={() => router.push('/events')}
         /> */}
         <Card
-          iconSquared="./images/marketing-icon.svg"
-          title="Marketing"
-          description="Social, digital, print and more"
-          color="yellow"
-          clickEvent={() => router.push('/marketing')}
-        />
-        <Card
-          iconSquared="./images/lender-icon.svg"
+          icon="./images/lender-icon.svg"
           title="Lender Lounge"
           description="Lenders contact information"
           color="green"
           clickEvent={() => router.push('/lender-lounge')}
         />
+        <Card
+          icon="./images/marketing-icon.svg"
+          title="Marketing"
+          description="Social, digital, print and more"
+          color="yellow"
+          clickEvent={() => router.push('/marketing')}
+        />
+
+        <Card
+          icon="./images/technology-icon.svg"
+          title="Technology"
+          description="Tech, tools and more"
+          color="blue"
+          clickEvent={() => router.push('/technology')}
+        />
         {/* <Card
-          iconSquared="./images/websites-icon.svg"
+          icon="./images/websites-icon.svg"
           title="Axiom Sites"
           description="Manage your axiom site data"
           color="teal"

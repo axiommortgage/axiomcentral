@@ -32,7 +32,7 @@ const Menu = () => (
   <aside className={styles.ax_menu}>
     <nav>
       <div className={styles.ax_menu_item}>
-        <UilApps size={20} />
+        <UilApps size={20} className={styles.primary} />
         <Link href="/dashboard"> Dashboard</Link>
       </div>
 
@@ -41,35 +41,37 @@ const Menu = () => (
           <Link href="/branding"> Branding</Link>
         </div> */}
 
-      <div className={styles.ax_menu_item}>
-        <UilServerNetworkAlt size={20} />
-        <Link href="/technology"> Technology</Link>
+      <div className={`${styles.ax_menu_item} ${styles.menuGreen}`}>
+        <UilUniversity size={20} className={styles.green} />
+        <Link href="/lender-lounge">Lender Lounge</Link>
       </div>
 
-      <div className={styles.ax_menu_item}>
-        <UilMegaphone size={20} />
+      <div className={`${styles.ax_menu_item} ${styles.menuYellow}`}>
+        <UilMegaphone size={20} className={styles.yellow} />
         <Link href="/marketing"> Marketing</Link>
+
+        <div className={`${styles.ax_submenu_item} ${styles.yellow}`}>
+          <Link href="/social-media-content"> Social Media</Link>
+        </div>
+
+        <div className={styles.ax_submenu_item}>
+          <Link href="/email-signature"> Email Signature</Link>
+        </div>
+
+        <div className={styles.ax_submenu_item}>
+          <Link href="/printables"> Printables</Link>
+        </div>
       </div>
 
-      <div className={styles.ax_menu_item}>
-        <UilUniversity size={20} />
-        <Link href="/lender-lounge"> Lender Lounge</Link>
+      <div className={`${styles.ax_menu_item} ${styles.menuBlue}`}>
+        <UilServerNetworkAlt size={20} className={styles.blue} />
+        <Link href="/technology"> Technology</Link>
       </div>
 
       {/* <div className={styles.ax_menu_item}>
           <UilGlobe size={20} />
           <Link href="/axiom-sites"> Axiom Sites</Link>
         </div> */}
-
-      <div className={styles.ax_menu_item}>
-        <UilEditAlt size={20} />
-        <Link href="/email-signature"> Email Signature</Link>
-      </div>
-
-      <div className={styles.ax_menu_item}>
-        <UilPrint size={20} />
-        <Link href="/printables"> Printables</Link>
-      </div>
 
       {/* <div className={styles.ax_menu_item}>
           <UilMoneyWithdraw size={20} />
@@ -142,17 +144,17 @@ const Menu = () => (
         </div> */}
 
       <div className={styles.ax_menu_item}>
-        <UilUser size={20} />
+        <UilUser size={20} className={styles.primary} />
         <Link href="/profile"> Profile</Link>
       </div>
 
-      <div className={styles.ax_menu_item}>
+      {/* <div className={styles.ax_menu_item}>
         <UilUser size={20} />
         <Link href="/all-brokers"> All Brokers</Link>
-      </div>
+      </div> */}
 
       <div className={styles.ax_menu_item}>
-        <UilSignOutAlt size={20} />
+        <UilSignOutAlt size={20} className={styles.primary} />
         <button type="button" onClick={logout}>
           Logout
         </button>
