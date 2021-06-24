@@ -5,7 +5,7 @@ import style from '../../styles/SocialPosts.module.scss'
 
 const SocialPostsList = (props) => {
   const { posts } = props
-  const images = posts[0].postImage
+  const images = posts
 
   const zipAndDownload = () => {
     const zip = new JSZip()
@@ -16,7 +16,15 @@ const SocialPostsList = (props) => {
 
     urls.forEach((url) => {
       const filename = `${url.name}${url.ext}`
-      const urlPath = url.formats.large.url
+      let urlPath
+      if (url.formats.large.url) {
+        urlPath = url.formats.large.url
+      } else if (url.formats.medium.url) {
+        urlPath = url.formats.medium.url
+      } else {
+        urlPath = url.formats.small.url
+      }
+
       // loading a file and add it in a zip file
       JSZipUtils.getBinaryContent(urlPath, (err, data) => {
         if (err) {
@@ -38,7 +46,7 @@ const SocialPostsList = (props) => {
       <ul className={style.imageList}>
         {images.map((item) => (
           <li key={item.id} className={style.imageItem}>
-            <img src={item.formats.large.url} alt={item.title} />
+            <img src={item.formats.small.url} alt={item.title} />
           </li>
         ))}
       </ul>

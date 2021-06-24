@@ -1,69 +1,91 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 import nookies from 'nookies'
 import axios from 'axios'
-import Calendar from 'react-calendar'
+// import Calendar from 'react-calendar'
+import Moment from 'react-moment'
+import Modal from 'react-modal'
+import { UilFolder } from '@iconscout/react-unicons'
 import Layout from '../components/Layout'
+import Processing from '../components/Processing'
 import style from '../styles/Marketing.module.scss'
+import SocialPostsList from '../components/SocialPosts/SocialPostsList'
 
 const Marketing = (props) => {
   const { posts, user, team } = props
-  const [value, onChange] = useState(new Date())
+  // const [value, onChange] = useState(new Date())
   const route = useRouter()
-  const [loading, setLoading] = useState(false)
+  const [expand, setExpand] = useState(false)
+  const [modal, setModal] = useState(false)
+  const [modalContent, setModalContent] = useState({})
+  const [content, setContent] = useState({})
 
-  const formattedDate = (date) =>
-    date.toLocaleDateString('en-CA', {
-      // you can use undefined as first argument
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
-    })
+  const expandable = useRef(null)
 
-  const tileAction = (date) => {
-    let path
-    posts.forEach((post) => {
-      if (post.date === formattedDate(date)) {
-        path = post.slug
-      }
-    })
-    setLoading(true)
-    route.push(`/social-media-posts/${path}`)
+  const customStyles = {
+    content: {
+      width: '65%',
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)'
+    }
   }
 
-  const tileContent = ({ date }) => {
-    let title
-    posts.forEach((post) => {
-      if (post.date === formattedDate(date)) {
-        title = <p>{post.title}</p>
-      }
-    })
-    return title
+  const handleModal = (e, i) => {
+    setModalContent(i)
+    setModal(!modal)
+  }
+
+  const showContent = (e, i) => {
+    setContent(i)
+  }
+
+  const closeModal = () => {
+    setModal(!modal)
+  }
+
+  const handleExpand = (e) => {
+    setExpand(!expand)
   }
 
   return (
-    <Layout>
-      <h1 className={style.ax_page_title}>Marketing</h1>
-      <h3 className={style.ax_page_subtitle}>Social media posts</h3>
-      <div className={style.calendarContainer}>
-        {loading ? (
-          <div className={style.boxedLoading}>
-            <img src="./images/spinner-white.svg" alt="loading" />
-          </div>
-        ) : (
-          ''
-        )}
-        <Calendar
-          onChange={onChange}
-          value={value}
-          onClickDay={tileAction}
-          tileContent={tileContent}
-          tileClassName={style.day}
-          className={style.calendar}
-          view="month"
-        />
-      </div>
-    </Layout>
+    <>
+      <Modal isOpen={modal} contentLabel="Example Modal" style={customStyles}>
+        <h1>{modalContent.title}</h1>
+        <button type="button" onClick={closeModal}>
+          Close
+        </button>
+      </Modal>
+      <Layout>
+        <h1 className={style.ax_page_title}>Social media content</h1>
+        <div className={style.contentContainer}>
+          <ul className={style.listColumn}>
+            {posts.map((p) => (
+              <li>
+                <button role="button" onClick={(e) => handleExpand(e)} ref={expandable}>
+                  <UilFolder /> <Moment format="MMMM Y">{p.month}</Moment>
+                </button>
+                <ul>
+                  {p.socialPosts.map((item) => (
+                    <li>
+                      <button type="button" onClick={(e) => showContent(e, item)}>
+                        <Moment format="DD">{item.postDate}</Moment> - {item.title}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+          <section className={style.contentColumn}>
+            {content.postImages ? <SocialPostsList posts={content.postImages} /> : ''}
+          </section>
+        </div>
+      </Layout>
+    </>
   )
 }
 
@@ -80,7 +102,7 @@ export const getServerSideProps = async (ctx) => {
     }
 
     const posts = await axios
-      .get(`${API_URL}/social-posts`, config)
+      .get(`${API_URL}/social-posts?_sort=month:DESC`, config)
       .then((res) => {
         const postList = res.data
         return postList

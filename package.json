@@ -20,6 +20,7 @@
     "jszip": "^3.6.0",
     "jszip-utils": "^0.1.0",
     "markdown-it": "^12.0.4",
+    "moment": "^2.29.1",
     "next": "10.0.5",
     "nookies": "^2.5.2",
     "nprogress": "^0.2.0",
@@ -30,6 +31,8 @@
     "react-draggable": "^4.4.3",
     "react-filterable-table": "^0.3.434",
     "react-indiana-drag-scroll": "^1.8.1",
+    "react-modal": "^3.14.3",
+    "react-moment": "^1.1.1",
     "sass": "^1.32.2"
   },
   "devDependencies": {

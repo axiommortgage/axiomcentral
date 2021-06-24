@@ -1,5 +1,6 @@
 import axios from 'axios'
 import nookies from 'nookies'
+import { useRouter } from 'next/router'
 import SocialPostsList from '../../components/SocialPosts/SocialPostsList'
 import { serializeJson } from '../../helpers/serializeData'
 import Layout from '../../components/Layout'
@@ -7,11 +8,15 @@ import style from '../../styles/Printables.module.scss'
 
 const SocialPost = (props) => {
   const { posts, user } = props
+  const Router = useRouter()
+  const postId = Router.query.id
+
+  console.log(posts)
 
   return (
     <Layout>
       <h1 className={style.ax_page_title}>Social Media Posts</h1>
-      <SocialPostsList posts={posts} user={user} />
+      {/* <SocialPostsList posts={posts} user={user} /> */}
     </Layout>
   )
 }
@@ -28,7 +33,7 @@ export const getServerSideProps = async (ctx) => {
   }
 
   const posts = await axios
-    .get(`${apiURL}/social-posts?slug_eq=${ctx.params.slug}`, config)
+    .get(`${apiURL}/social-posts?id_in=${ctx.params.id}`, config)
     .then((res) => {
       const postData = serializeJson(res.data)
       return postData
