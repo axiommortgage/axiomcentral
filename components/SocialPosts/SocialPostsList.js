@@ -1,11 +1,14 @@
+import { useState } from 'react'
 import { saveAs } from 'file-saver'
 import * as JSZip from 'jszip'
 import * as JSZipUtils from 'jszip-utils'
 import style from '../../styles/SocialPosts.module.scss'
+import Processing from '../Processing'
 
 const SocialPostsList = (props) => {
   const { posts } = props
   const images = posts
+  const [loading, setLoading] = useState(true)
 
   const zipAndDownload = () => {
     const zip = new JSZip()

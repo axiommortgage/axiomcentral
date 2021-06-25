@@ -11,5 +11,6 @@ export const authStatus = () => {
 
 export const logout = () => {
   Cookies.remove('jwt')
+  Cookies.remove('userId')
   Router.push('/')
 }

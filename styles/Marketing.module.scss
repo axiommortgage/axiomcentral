@@ -126,6 +126,12 @@
       &:hover {
         color: $highlight-color;
       }
+
+      span {
+        font-weight: 400;
+        color: $highlight-dark;
+        margin-left: 0.8rem;
+      }
     }
 
     svg {

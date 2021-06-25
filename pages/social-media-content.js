@@ -1,26 +1,16 @@
-import { useState, useRef } from 'react'
-import { useRouter } from 'next/router'
+import { useState } from 'react'
 import nookies from 'nookies'
 import axios from 'axios'
-// import Calendar from 'react-calendar'
 import Moment from 'react-moment'
 import Modal from 'react-modal'
 import { UilFolder } from '@iconscout/react-unicons'
 import Layout from '../components/Layout'
-import Processing from '../components/Processing'
 import style from '../styles/Marketing.module.scss'
 import SocialPostsList from '../components/SocialPosts/SocialPostsList'
 
 const Marketing = (props) => {
-  const { posts, user, team } = props
-  // const [value, onChange] = useState(new Date())
-  const route = useRouter()
-  const [expand, setExpand] = useState(false)
-  const [modal, setModal] = useState(false)
-  const [modalContent, setModalContent] = useState({})
+  const { posts, user } = props
   const [content, setContent] = useState({})
-
-  const expandable = useRef(null)
 
   const customStyles = {
     content: {
@@ -34,11 +24,6 @@ const Marketing = (props) => {
     }
   }
 
-  const handleModal = (e, i) => {
-    setModalContent(i)
-    setModal(!modal)
-  }
-
   const showContent = (e, i) => {
     setContent(i)
   }
@@ -47,39 +32,139 @@ const Marketing = (props) => {
     setModal(!modal)
   }
 
-  const handleExpand = (e) => {
-    setExpand(!expand)
+  const userPosts = () => {
+    let postsArr = []
+    posts.filter((p) =>
+      p.socialPosts.map((item) => {
+        if (item.alberta && user.team.province === 'alberta') {
+          postsArr = [...postsArr, item]
+        }
+      })
+    )
+    return postsArr
   }
+
+  const postItem = (item) => (
+    <li key={item.id}>
+      <button type="button" onClick={(e) => showContent(e, item)}>
+        <Moment format="DD">{item.postDate}</Moment> - {item.title}
+      </button>
+    </li>
+  )
 
   return (
     <>
-      <Modal isOpen={modal} contentLabel="Example Modal" style={customStyles}>
-        <h1>{modalContent.title}</h1>
-        <button type="button" onClick={closeModal}>
-          Close
-        </button>
-      </Modal>
       <Layout>
         <h1 className={style.ax_page_title}>Social media content</h1>
         <div className={style.contentContainer}>
-          <ul className={style.listColumn}>
-            {posts.map((p) => (
-              <li>
-                <button role="button" onClick={(e) => handleExpand(e)} ref={expandable}>
-                  <UilFolder /> <Moment format="MMMM Y">{p.month}</Moment>
-                </button>
-                <ul>
-                  {p.socialPosts.map((item) => (
-                    <li>
-                      <button type="button" onClick={(e) => showContent(e, item)}>
-                        <Moment format="DD">{item.postDate}</Moment> - {item.title}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ul>
+          {posts ? (
+            <ul className={style.listColumn}>
+              {posts.map((p) => {
+                let counter = 0
+                p.socialPosts.forEach((sp) => {
+                  if (sp.all) {
+                    counter++
+                  }
+                  if (user.team.province === 'alberta' && sp.all) {
+                    counter++
+                  }
+                  if (sp.britishColumbia && user.team.province === 'britishColumbia') {
+                    counter++
+                  }
+                  if (sp.manitoba && user.team.province === 'manitoba') {
+                    counter++
+                  }
+                  if (sp.newBrunswick && user.team.province === 'newBrunswick') {
+                    counter++
+                  }
+                  if (sp.newFoundlandAndLabrador && user.team.province === 'newFoundlandAndLabrador') {
+                    counter++
+                  }
+                  if (sp.northwestTerritories && user.team.province === 'northwestTerritories') {
+                    counter++
+                  }
+                  if (sp.novaScotia && user.team.province === 'novaScotia') {
+                    counter++
+                  }
+                  if (sp.nunavut && user.team.province === 'nunavut') {
+                    counter++
+                  }
+                  if (sp.ontario && user.team.province === 'ontario') {
+                    counter++
+                  }
+                  if (sp.princeEdwardIsland && user.team.province === 'princeEdwardIsland') {
+                    counter++
+                  }
+                  if (sp.quebec && user.team.province === 'quebec') {
+                    counter++
+                  }
+                  if (sp.saskatchewan && user.team.province === 'saskatchewan') {
+                    counter++
+                  }
+                  if (sp.yukon && user.team.province === 'yukon') {
+                    counter++
+                  }
+                })
+                return (
+                  <li key={p.id}>
+                    <button role="button">
+                      <UilFolder /> <Moment format="MMMM Y">{p.month}</Moment>
+                      <span>({counter})</span>
+                    </button>
+
+                    <ul>
+                      {p.socialPosts.map((item) => {
+                        if (item.all) {
+                          return postItem(item)
+                        }
+                        if (item.alberta && user.team.province === 'alberta') {
+                          return postItem(item)
+                        }
+                        if (item.britishColumbia && user.team.province === 'britishColumbia') {
+                          return postItem(item)
+                        }
+                        if (item.manitoba && user.team.province === 'manitoba') {
+                          return postItem(item)
+                        }
+                        if (item.newBrunswick && user.team.province === 'newBrunswick') {
+                          return postItem(item)
+                        }
+                        if (item.newFoundlandAndLabrador && user.team.province === 'newFoundlandAndLabrador') {
+                          return postItem(item)
+                        }
+                        if (item.northwestTerritories && user.team.province === 'northwestTerritories') {
+                          return postItem(item)
+                        }
+                        if (item.novaScotia && user.team.province === 'novaScotia') {
+                          return postItem(item)
+                        }
+                        if (item.nunavut && user.team.province === 'nunavut') {
+                          return postItem(item)
+                        }
+                        if (item.ontario && user.team.province === 'ontario') {
+                          return postItem(item)
+                        }
+                        if (item.princeEdwardIsland && user.team.province === 'princeEdwardIsland') {
+                          return postItem(item)
+                        }
+                        if (item.quebec && user.team.province === 'quebec') {
+                          return postItem(item)
+                        }
+                        if (item.saskatchewan && user.team.province === 'saskatchewan') {
+                          return postItem(item)
+                        }
+                        if (item.yukon && user.team.province === 'yukon') {
+                          return postItem(item)
+                        }
+                      })}
+                    </ul>
+                  </li>
+                )
+              })}
+            </ul>
+          ) : (
+            'loading'
+          )}
           <section className={style.contentColumn}>
             {content.postImages ? <SocialPostsList posts={content.postImages} /> : ''}
           </section>
@@ -121,21 +206,10 @@ export const getServerSideProps = async (ctx) => {
         throw err
       })
 
-    const team = await axios
-      .get(`${API_URL}/teams`, config)
-      .then((res) => {
-        const teamData = res.data
-        return teamData
-      })
-      .catch((err) => {
-        throw err
-      })
-
     return {
       props: {
         posts,
-        user,
-        team
+        user
       }
     }
   }
