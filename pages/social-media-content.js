@@ -109,7 +109,7 @@ const Marketing = (props) => {
                   <li key={p.id}>
                     <button role="button">
                       <UilFolder /> <Moment format="MMMM Y">{p.month}</Moment>
-                      <span>({counter})</span>
+                      {/* <span>({counter})</span> */}
                     </button>
 
                     <ul>

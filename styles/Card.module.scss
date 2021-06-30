@@ -193,49 +193,57 @@
 }
 
 .purple {
-  background: lighten($purple, 40%);
+  background: $purple;
 
-  h3 {
-    color: $base-color !important;
+  h3, p {
+    color: $bright-color !important;
   }
 }
 
 .green {
-  background: lighten($green, 40%);
+  background: $green;
 
-  h3 {
-    color: $base-color !important;
+  h3, p {
+    color: $bright-color !important;
+  }
+}
+
+.grassgreen {
+  background: $grassgreen;
+
+  h3, p {
+    color: $bright-color !important;
   }
 }
 
 .orange {
-  background: lighten($orange, 40%);
+  background: $orange;
 
-  h3 {
-    color: $base-color !important;
+  h3, p {
+    color: $bright-color !important;
   }
 }
 
 .blue {
-  background: lighten($blue, 40%);
+  background: $blue;
 
-  h3 {
-    color: $base-color !important;
+  h3, p {
+    color: $bright-color !important;
   }
 }
 
 .teal {
-  background: lighten($teal, 40%);
+  background: $teal;
 
-  h3 {
-    color: $base-color !important;
+  h3, p {
+    color: $bright-color !important;
   }
 }
 
 .yellow {
-  background: lighten($yellow, 40%);
+  background: $yellow;  
 
-  h3 {
-    color: $base-color !important;
+  h3, p {
+    color: $bright-color !important;
   }
 }

@@ -12,14 +12,14 @@ const Dashboard = () => {
     <Layout>
       <h1 className={style.ax_page_title}>Dashboard</h1>
       <div className={style.ax_card_list}>
-        {/* <Card
-          icon="./images/branding-icon.svg"
+        <Card
+          icon="./images/branding-icon.png"
           title="Branding"
           description="Logos, graphics and guidelines"
-          color="purple"
+          color="green"
                     clickEvent={() => router.push('/branding')}
 
-        /> */}
+        />
         {/* <Card
           icon="./images/events-icon.svg"
           title="Events"
@@ -28,14 +28,14 @@ const Dashboard = () => {
           clickEvent={() => router.push('/events')}
         /> */}
         <Card
-          icon="./images/lender-icon.svg"
+          icon="./images/lenders-icon.png"
           title="Lender Lounge"
           description="Lenders contact information"
-          color="green"
+          color="teal"
           clickEvent={() => router.push('/lender-lounge')}
         />
         <Card
-          icon="./images/marketing-icon.svg"
+          icon="./images/marketing-icon.png"
           title="Marketing"
           description="Social, digital, print and more"
           color="yellow"
@@ -43,7 +43,7 @@ const Dashboard = () => {
         />
 
         <Card
-          icon="./images/technology-icon.svg"
+          icon="./images/technology-icon.png"
           title="Technology"
           description="Tech, tools and more"
           color="blue"

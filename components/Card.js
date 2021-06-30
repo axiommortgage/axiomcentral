@@ -27,6 +27,8 @@ const CardWithIcon = (props) => {
         return style.blue
       case 'green':
         return style.green
+      case 'grassgreen':
+          return style.grassgreen
       case 'yellow':
         return style.yellow
       case 'teal':
