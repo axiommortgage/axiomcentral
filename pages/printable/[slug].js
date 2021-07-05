@@ -28,7 +28,6 @@ const Printable = (props) => {
     const formatedPhone = formatPhone(user.phone)
 
     const itemPosition = (item, position) => {
-      console.log('PRT', position)
       if (item === 'title') {
         switch (position) {
           case 'columnRight':

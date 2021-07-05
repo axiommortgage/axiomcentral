@@ -72,7 +72,7 @@ const Signature = (props) => {
       >
         <tbody>
           <tr>
-            <td colSpan="2">
+            <td colSpan="3">
               <table cellPadding="0" cellSpacing="0">
                 <tbody>
                   <tr>
@@ -251,7 +251,7 @@ const Signature = (props) => {
             </td>
           </tr>
           <tr>
-            <td colSpan="2" style={{ paddingTop: '15px' }} />
+            <td colSpan="3" style={{ paddingTop: '8px' }} />
           </tr>
           <tr>
             <td style={{ borderTop: '1px solid #84bd00' }}>
@@ -260,9 +260,24 @@ const Signature = (props) => {
                 alt={context.brokerage}
               />
             </td>
-            <td width="320" style={{ verticalAlign: 'top', borderTop: '1px solid #84bd00' }}>
+            <td style={{ verticalAlign: 'top', borderTop: '1px solid #84bd00', width: '180px' }}>
+              <p
+                style={{
+                  margin: 0,
+                  paddingTop: '16px',
+                  paddingLeft: '4px',
+                  verticalAlign: 'middle',
+                  height: '40px',
+                  fontSize: '10px',
+                  fontWeight: 'bold'
+                }}
+              >
+                FSRA&nbsp;12403
+              </p>
+            </td>
+            <td width="154" style={{ verticalAlign: 'top', borderTop: '1px solid #84bd00' }}>
               <table
-                width="320"
+                width="154"
                 height="32"
                 border="0"
                 cellPadding="0"

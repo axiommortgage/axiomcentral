@@ -70,7 +70,7 @@ const Signature = (props) => {
       >
         <tbody>
           <tr>
-            <td colSpan="2">
+            <td colSpan="3">
               <table>
                 <tbody>
                   <tr>
@@ -250,7 +250,7 @@ const Signature = (props) => {
             </td>
           </tr>
           <tr>
-            <td colSpan="2" style={{ paddingTop: '15px', height: '22px', paddingBottom: '0' }} />
+            <td colSpan="3" style={{ paddingTop: '15px', height: '22px', paddingBottom: '0' }} />
           </tr>
           <tr>
             <td
@@ -265,11 +265,27 @@ const Signature = (props) => {
               <img
                 src="http://brand.axiommortgage.ca/assets/email-signatures/images/2021/axiom-mortgage-logo-horizontal.png"
                 alt={context.brokerage}
+                style={{ width: '200px' }}
               />
             </td>
-            <td width="320" style={{ verticalAlign: 'top', borderTop: '1px solid #84bd00' }}>
+            <td style={{ verticalAlign: 'top', borderTop: '1px solid #84bd00', width: '180px' }}>
+              <p
+                style={{
+                  margin: 0,
+                  paddingTop: '18px',
+                  paddingLeft: '4px',
+                  verticalAlign: 'middle',
+                  height: '40px',
+                  fontSize: '10px',
+                  fontWeight: 'bold'
+                }}
+              >
+                FSRA&nbsp;12403
+              </p>
+            </td>
+            <td width="154" style={{ verticalAlign: 'top', borderTop: '1px solid #84bd00' }}>
               <table
-                width="320"
+                width="154"
                 height="32"
                 border="0"
                 cellPadding="0"

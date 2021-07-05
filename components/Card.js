@@ -1,3 +1,4 @@
+import Moment from 'react-moment'
 import style from '../styles/Card.module.scss'
 import Button from './Button'
 
@@ -14,7 +15,8 @@ const CardWithIcon = (props) => {
     linkUrl,
     buttonLabel,
     openInBlank,
-    clickEvent
+    clickEvent,
+    date
   } = props
 
   const handleColor = () => {
@@ -52,6 +54,7 @@ const CardWithIcon = (props) => {
         <div className={style.ax_card_body} style={{ marginBottom: `${hasButton ? '32px' : '  '} ` }}>
           <h3>{title}</h3>
           <p>{description}</p>
+          {date ? <p><Moment format="MMMM DD, YYYY">{date}</Moment></p> : ''}
         </div>
 
         {hasButton ? (

@@ -2,7 +2,6 @@ import { useState } from 'react'
 import nookies from 'nookies'
 import axios from 'axios'
 import Moment from 'react-moment'
-import Modal from 'react-modal'
 import { UilFolder } from '@iconscout/react-unicons'
 import Layout from '../components/Layout'
 import style from '../styles/Marketing.module.scss'
@@ -10,26 +9,10 @@ import SocialPostsList from '../components/SocialPosts/SocialPostsList'
 
 const Marketing = (props) => {
   const { posts, user } = props
-  const [content, setContent] = useState({})
-
-  const customStyles = {
-    content: {
-      width: '65%',
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)'
-    }
-  }
+  const [content, setContent] = useState({})  
 
   const showContent = (e, i) => {
     setContent(i)
-  }
-
-  const closeModal = () => {
-    setModal(!modal)
   }
 
   const userPosts = () => {
@@ -65,7 +48,7 @@ const Marketing = (props) => {
                   if (sp.all) {
                     counter++
                   }
-                  if (user.team.province === 'alberta' && sp.all) {
+                  if (sp.alberta && user.team.province === 'alberta' ) {
                     counter++
                   }
                   if (sp.britishColumbia && user.team.province === 'britishColumbia') {
@@ -109,7 +92,7 @@ const Marketing = (props) => {
                   <li key={p.id}>
                     <button role="button">
                       <UilFolder /> <Moment format="MMMM Y">{p.month}</Moment>
-                      {/* <span>({counter})</span> */}
+                      <span>({counter})</span>
                     </button>
 
                     <ul>

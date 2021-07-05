@@ -4,7 +4,7 @@ import {
   UilPrint,
   UilSignOutAlt,
   // UilBooks,
-  // UilEnvelopeAlt,
+  UilEnvelopeAlt,
   UilEditAlt,
   // UilFolder,
   // UilFidgetSpinner,
@@ -13,7 +13,7 @@ import {
   // UilStar,
   // UilHeart,
   // UilShieldCheck,
-  // UilMoneyWithdraw,
+  UilMoneyWithdraw,
   // UilGlobe,
   UilUniversity,
   UilMegaphone,
@@ -46,13 +46,18 @@ const Menu = () => {
           <Link href="/dashboard"> Dashboard</Link>
         </div>
 
+        <div className={styles.ax_menu_item}>
+          <UilMoneyWithdraw size={20} className={styles.primary}/>
+          <Link href="https://commissions.scarlettnetwork.com/StatementsInvoices/DetailedCommissionStatements" target="_blank"> Payroll</Link>
+        </div>
+
         {/* <div className={styles.ax_menu_item}>
           <UilBullseye size={20} />
           <Link href="/branding"> Branding</Link>
         </div> */}
 
         <div className={`${styles.ax_menu_item} ${styles.menuGreen}`}>
-          <UilUniversity size={20} className={styles.green} />
+          <UilUniversity size={20} className={styles.teal} />
           <Link href="/lender-lounge">Lender Lounge</Link>
         </div>
 
@@ -72,21 +77,12 @@ const Menu = () => {
             <Link href="/printables"> Printables</Link>
           </div>
         </div>
-
-        <div className={`${styles.ax_menu_item} ${styles.menuBlue}`}>
-          <UilServerNetworkAlt size={20} className={styles.blue} />
-          <Link href="/technology"> Technology</Link>
-        </div>
+        
 
         {/* <div className={styles.ax_menu_item}>
           <UilGlobe size={20} />
           <Link href="/axiom-sites"> Axiom Sites</Link>
-        </div> */}
-
-        {/* <div className={styles.ax_menu_item}>
-          <UilMoneyWithdraw size={20} />
-          <Link href="/payroll-compliance"> Payroll Compliance</Link>
-        </div> */}
+        </div> */}        
 
         {/* <div className={styles.ax_menu_item}>
           <UilCalender size={20} />
@@ -143,10 +139,15 @@ const Menu = () => {
           <Link href="/book-club"> Axiom Book Club</Link>
         </div> */}
 
-        {/* <div className={styles.ax_menu_item}>
-          <UilEnvelopeAlt size={20} />
-          <Link href="/newsletter"> Newsletter</Link>
-        </div> */}
+        <div className={styles.ax_menu_item}>
+          <UilEnvelopeAlt size={20} className={styles.yellow}/>
+          <Link href="/newsletter-archive"> Newsletter Archive</Link>
+        </div>
+
+        <div className={`${styles.ax_menu_item} ${styles.menuBlue}`}>
+          <UilServerNetworkAlt size={20} className={styles.blue} />
+          <Link href="/technology"> Technology</Link>
+        </div>
 
         {/* <div className={styles.ax_menu_item}>
           <UilUserPlus size={20} />

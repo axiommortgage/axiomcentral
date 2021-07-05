@@ -13,11 +13,11 @@ const Dashboard = () => {
       <h1 className={style.ax_page_title}>Dashboard</h1>
       <div className={style.ax_card_list}>
         <Card
-          icon="./images/branding-icon.png"
-          title="Branding"
-          description="Logos, graphics and guidelines"
+          icon="./images/payroll-icon.png"
+          title="Payroll"
+          description="Payroll and Compliance"
           color="green"
-                    clickEvent={() => router.push('/branding')}
+          clickEvent={() => window.open('https://commissions.scarlettnetwork.com/StatementsInvoices/DetailedCommissionStatements')}
 
         />
         {/* <Card
